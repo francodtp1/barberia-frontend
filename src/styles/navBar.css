@@ -1,0 +1,385 @@
+:root {
+    --brand-clr: hsl(0, 0%, 91%);
+    --bg-primary: hsl(195, 20%, 86%);
+    --border-clr: hsla(0, 0%, 17%, 0.833);
+    --accent-blue: hsla(0, 0%, 75%, 0.796);
+    --text-primary: hsl(0, 0%, 100%);
+    --text-accent: hsl(195, 2%, 78%);
+
+    --header: 3.5rem;
+    --full-width: 100%;
+    --padding-space: calc(var(--full-width) - 2rem);
+    --max-width: 80rem;
+    --min-width: 22.5rem;
+
+    --bd-radius: 0.1em;
+    --space-025: 0.25rem;
+    --space-05: 0.5rem;
+    --space-1: 2rem;
+    --space-2: 1rem;
+    /* Espacio personalizado */
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+.container {
+    display: grid;
+    place-self: center;
+    inline-size: clamp(var(--min-width),
+            var(--padding-space),
+            var(--max-width));
+    align-items: start;
+}
+
+/* Barra de Navegación */
+.site-header {
+    --padding: 1rem;
+    --shadow: 0 0.1875em 0.3125em #0003, 0 0.125em 0.5em #0002;
+    position: fixed;
+    top: var(--space-2);
+    left: var(--space-2);
+    right: var(--space-2);
+    z-index: 1000;
+    min-block-size: var(--header);
+    background: rgba(93, 88, 88, 0.7); /* Fondo semi-transparente */
+    backdrop-filter: blur(10px); /* Efecto blur */
+    border-radius: var(--bd-radius);
+    padding-inline: var(--padding);
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.header__content--flow {
+    block-size: inherit;
+    display: flex;
+    flex-flow: wrap;
+
+    /* Breakpoint 1280px > 720px */
+    gap: 0 clamp(3.5rem, -24.14rem + 61.43vw, 25rem);
+}
+
+.header__content--flow>* {
+    flex-grow: 1;
+    height: var(--header);
+    width: calc((45rem - var(--full-width) - (var(--padding) * 2)) * 999);
+}
+
+.header-content--left {
+    display: flex;
+    justify-content: flex-start;  /* Alinea los elementos hacia la derecha */
+    align-items: center;        /* Centra verticalmente */
+    flex-grow: 0;   
+}
+
+.brand-logo {
+    gap: var(--space-05);
+    padding: 0.25em 0.75em;
+    align-items: center;
+    display: inline-flex;
+    text-decoration: none;
+}
+
+.logo-text {
+    color: var(--text-primary);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.nav-toggle {
+    aspect-ratio: 1;
+    height: 2.25rem;
+    display: inline-grid;
+    place-content: center;
+    background: none;
+    border: none;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.nav-toggle:active {
+    scale: 0.9;
+}
+
+.toggle--icon {
+    width: 1.5rem;
+    height: 0.25rem;
+    border-radius: 10vh;
+    position: relative;
+    background-color: #d48019;
+}
+
+.toggle--icon::before,
+.toggle--icon::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background-color: #d48019;
+    translate: 0 var(--bar--top, 0.5rem);
+}
+
+.toggle--icon::after {
+    --bar--top: -0.5rem;
+}
+
+.header-content--right {
+    display: flex;
+    justify-content: flex-end; /* Alinea los elementos hacia la derecha */
+    align-items: center; /* Centra verticalmente */
+    flex: 45; /* Ocupa el espacio restante */
+}
+
+.header-nav {
+    display: grid;
+    align-items: center;
+    block-size: 100%;
+}
+
+.nav__list {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    grid-auto-flow: column;
+    justify-content: space-evenly;
+    grid-auto-rows: 2.25rem;
+    
+}
+
+.list-item {
+    block-size: 100%;
+}
+
+.nav__link {
+    block-size: inherit;
+    display: inline-grid;
+    place-items: center;
+    min-width: 10ch;
+    color: var(--text-primary);
+    font-size: 14.3px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.btnAuth-nav {
+    --primary-color: #d48019;
+    --hovered-color: #f1f1f1;
+    block-size: inherit;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+    margin: 0;
+    margin-right:50px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: "Jaro", sans-serif;
+    text-transform: uppercase;
+    position: relative;
+    font-weight: 500;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.btnAuth-nav p {
+    margin: 0;
+    position: relative;
+    font-size: 18.3px;
+    color: var(--primary-color);
+}
+
+.btnAuth-nav p::before {
+    position: absolute;
+    /*   box-sizing: border-box; */
+    content: "Registrarse";
+    text-transform: uppercase;
+    width: 0%;
+    inset: 0;
+    color: var(--hovered-color);
+    overflow: hidden;
+    transition: 0.3s ease-out;
+}
+
+.btnAuth-nav:hover::after {
+    width: 100%;
+}
+
+.btnAuth-nav:hover p::before {
+    width: 100%;
+}
+
+.btnAuth-nav-salir{
+    --primary-color: #d48019;
+    --hovered-color: #f1f1f1;
+    block-size: inherit;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+    margin: 0;
+    margin-right: 30px;
+    margin-left: 20px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: "Jaro", sans-serif;
+    text-transform: uppercase;
+    position: relative;
+    font-weight: 500;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.btnAuth-nav-salir p {
+    margin: 0;
+    position: relative;
+    font-size: 18.3px;
+    color: var(--primary-color);
+}
+
+.btnAuth-nav-salir p::before {
+    position: absolute;
+    content: "salir";
+    text-transform: uppercase;
+    width: 0%;
+    inset: 0;
+    color: var(--hovered-color);
+    overflow: hidden;
+    transition: 0.3s ease-out;
+}
+
+.btnAuth-nav-salir:hover::after {
+    width: 100%;
+}
+
+.btnAuth-nav-salir:hover p::before {
+    width: 100%;
+}
+
+.nav__link:focus-within {
+    color: var(--accent-blue);
+}
+
+.nav__link:hover:not(:focus) {
+    border-bottom: 2px solid currentColor;
+}
+
+.nav__list:hover .nav__link:not(:focus, :hover) {
+    color: var(--text-accent);
+}
+
+@media (max-width: 575px) {
+    .header-content--left {
+        justify-content: space-between;
+    }
+
+    .header-content--right {
+        height: auto;
+    }
+
+    .nav-toggle {
+        visibility: visible;
+    }
+
+    /* Centrado del menú desplegable */
+    .nav__list {
+        position: fixed;
+        top: calc(var(--header) + 1px);
+        /* Ajusta según la altura de la barra */
+        right: 1px;
+        width: clamp(10rem, 40%, 15rem);
+        background: rgba(93, 88, 88, 0.7); /* Fondo semi-transparente */
+        backdrop-filter: blur(10px); /* Efecto blur */
+        border-radius: var(--bd-radius);
+        border: 1px solid var(--border-clr);
+        padding-block: 0.5rem;
+        padding-bottom: 1.5rem;
+        gap: var(--space-05) 0;
+        grid-auto-flow: row;
+        box-shadow: var(--shadow);
+        visibility: hidden;
+        opacity: 0;
+        transform: translateX(100%);
+        /* Fuera de pantalla a la derecha */
+        transition: transform 0.4s ease, opacity 0.4s ease;
+    }
+
+    .nav__list[aria-expanded="true"] {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /* Animaciones de entrada y salida */
+    .slide-in {
+        animation: slideIn 1.4s forwards;
+    }
+
+    .slide-out {
+        animation: slideOut 1.4s forwards;
+    }
+
+    /* Centrado de los enlaces */
+    .nav__link {
+        display: flex;
+        /* Usamos flex para centrar contenido */
+        align-items: center;
+        /* Centra verticalmente */
+        justify-content: center;
+        text-align: center;
+        /* Centra horizontalmente */
+        min-width: 100%;
+        /* Ajusta el ancho a la fila */
+        block-size: 2.5rem;
+        /* Altura fija para los enlaces */
+        font-size: 16px;
+        /* Ajustamos el tamaño de la fuente */
+        font-weight: 500;
+        text-transform: uppercase;
+        color: var(--text-primary);
+    }
+
+    .list-item {
+        block-size: 100%;
+    }
+
+    .btnAuth-nav-salir {
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+        text-align: center; /* Ajusta la alineación del texto */
+        margin: 0 auto; /* Centra dentro de su contenedor */
+        min-width: 90%; /* Ancho del botón adaptado */
+        padding: 0.5rem 0; /* Espaciado interno */
+    }
+
+    .btnAuth-nav {
+        margin: 0; /* Elimina márgenes innecesarios */
+        position: absolute; /* Permite una ubicación precisa */
+        right: 20px; /* Alinea a la derecha */
+        top: 50%; /* Centra verticalmente respecto al contenedor */
+        transform: translateY(-50%); /* Ajusta el centro perfecto */
+    }
+
+  
+}
+
+
