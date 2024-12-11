@@ -42,7 +42,7 @@
     }
 }
 
-.container {
+.containerNav {
     display: grid;
     place-self: center;
     inline-size: clamp(var(--min-width),

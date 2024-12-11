@@ -72,7 +72,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="container" onClick={closeMenu}>
+    <div className="containerNav" onClick={closeMenu}>
       <header className="site-header">
         <div className="header__content--flow">
           <section className="header-content--left">

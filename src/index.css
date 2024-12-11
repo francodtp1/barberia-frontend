@@ -9,11 +9,13 @@
 }
 
 /* Asegura que html y body ocupen el 100% de la ventana */
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden; /* Evita cualquier scroll */
+    overflow: hidden;
+    /* Evita cualquier scroll */
     font-family: "Jaro", sans-serif;
 }
 
@@ -22,13 +24,14 @@ body {
     background-image: url('./assets/fondobarberia6.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; 
+    background-attachment: fixed;
     text-transform: uppercase;
 }
 
 /* Overlay */
 .overlay {
-    position: fixed; /* Cambiado a 'fixed' para que no se mueva al hacer scroll */
+    position: fixed;
+    /* Cambiado a 'fixed' para que no se mueva al hacer scroll */
     top: 0;
     left: 0;
     width: 100%;
@@ -37,13 +40,24 @@ body {
     z-index: 1;
 }
 
+.container {
+    display: grid;
+    place-self: center;
+    align-items: start;
+}
+
+
 /* En tu archivo CSS */
 .swal2-confirm {
-    background-color: #d48019 !important; /* Color de fondo */
-    border-color: #d48019 !important; /* Color del borde */
+    background-color: #d48019 !important;
+    /* Color de fondo */
+    border-color: #d48019 !important;
+    /* Color del borde */
 }
 
 .swal2-cancel {
-    background-color: #d48019 !important; /* Si tienes un botón de cancelación */
-    border-color: #d48019 !important; /* Color del borde del botón de cancelación */
+    background-color: #d48019 !important;
+    /* Si tienes un botón de cancelación */
+    border-color: #d48019 !important;
+    /* Color del borde del botón de cancelación */
 }
