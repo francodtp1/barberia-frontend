@@ -2,8 +2,8 @@ import '../styles/listaTurnos.css';
 
 const ListaTurnos = ({ isOpen, onClose, turnosDisponibles, eliminarTurno, fechaSeleccionada }) => {
     return (
-        <div className={`modal-overlay ${isOpen ? 'show' : ''}`}>
-            <div className="modal-container">
+        <div className={`modal-overlay-turnos ${isOpen ? 'show' : ''}`}>
+            <div className="modal-container-turnos">
                 <div className="modal-header">
                     <h2 className="modal-title">Horarios disponibles para {fechaSeleccionada}</h2>
                     <button className="close-button" onClick={onClose}>

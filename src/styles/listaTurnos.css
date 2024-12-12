@@ -1,4 +1,4 @@
-.modal-overlay {
+.modal-overlay-turnos {
     position: fixed;
     top: 0;
     left: 0;
@@ -14,12 +14,12 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.modal-overlay.show {
+.modal-overlay-turnos.show {
     opacity: 1;
     visibility: visible;
 }
 
-.modal-container {
+.modal-container-turnos {
     background: rgba(93, 88, 88, 0.7);
     backdrop-filter: blur(10px);
     width: 90%;
@@ -33,7 +33,7 @@
     transition: transform 1.0s ease;
 }
 
-.modal-overlay.show .modal-container {
+.modal-overlay-turnos.show .modal-container-turnos {
     transform: scale(1);
 }
 
