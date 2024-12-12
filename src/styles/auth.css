@@ -16,8 +16,8 @@
 .auth-box {
     width: 350px;
     height: 500px;
-    background: rgba(93, 88, 88, 0.7); /* Fondo semi-transparente */
-    backdrop-filter: blur(10px); /* Efecto blur */
+    background: rgba(93, 88, 88, 0.7); 
+    backdrop-filter: blur(10px); 
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 5px 20px 50px #000;

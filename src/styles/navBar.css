@@ -25,6 +25,7 @@
         transform: translateX(100%);
         opacity: 0;
     }
+
     to {
         transform: translateX(0);
         opacity: 1;
@@ -36,6 +37,7 @@
         transform: translateX(0);
         opacity: 1;
     }
+
     to {
         transform: translateX(100%);
         opacity: 0;
@@ -61,8 +63,8 @@
     right: var(--space-2);
     z-index: 1000;
     min-block-size: var(--header);
-    background: rgba(93, 88, 88, 0.7); /* Fondo semi-transparente */
-    backdrop-filter: blur(10px); /* Efecto blur */
+    background: rgba(93, 88, 88, 0.7);
+    backdrop-filter: blur(10px);
     border-radius: var(--bd-radius);
     padding-inline: var(--padding);
     box-shadow: var(--shadow);
@@ -86,9 +88,11 @@
 
 .header-content--left {
     display: flex;
-    justify-content: flex-start;  /* Alinea los elementos hacia la derecha */
-    align-items: center;        /* Centra verticalmente */
-    flex-grow: 0;   
+    justify-content: flex-start;
+    /* Alinea los elementos hacia la derecha */
+    align-items: center;
+    /* Centra verticalmente */
+    flex-grow: 0;
 }
 
 .brand-logo {
@@ -144,9 +148,12 @@
 
 .header-content--right {
     display: flex;
-    justify-content: flex-end; /* Alinea los elementos hacia la derecha */
-    align-items: center; /* Centra verticalmente */
-    flex: 45; /* Ocupa el espacio restante */
+    justify-content: flex-end;
+    /* Alinea los elementos hacia la derecha */
+    align-items: center;
+    /* Centra verticalmente */
+    flex: 45;
+    /* Ocupa el espacio restante */
 }
 
 .header-nav {
@@ -162,7 +169,7 @@
     grid-auto-flow: column;
     justify-content: space-evenly;
     grid-auto-rows: 2.25rem;
-    
+
 }
 
 .list-item {
@@ -188,7 +195,7 @@
     place-items: center;
     padding: 0;
     margin: 0;
-    margin-right:50px;
+    margin-right: 50px;
     border: none;
     background: none;
     cursor: pointer;
@@ -227,7 +234,7 @@
     width: 100%;
 }
 
-.btnAuth-nav-salir{
+.btnAuth-nav-salir {
     --primary-color: #d48019;
     --hovered-color: #f1f1f1;
     block-size: inherit;
@@ -306,8 +313,8 @@
         /* Ajusta según la altura de la barra */
         right: 1px;
         width: clamp(10rem, 40%, 15rem);
-        background: rgba(93, 88, 88, 0.7); /* Fondo semi-transparente */
-        backdrop-filter: blur(10px); /* Efecto blur */
+        background: rgba(93, 88, 88, 0.786);
+        backdrop-filter: blur(10px);
         border-radius: var(--bd-radius);
         border: 1px solid var(--border-clr);
         padding-block: 0.5rem;
@@ -363,23 +370,32 @@
 
     .btnAuth-nav-salir {
         display: flex;
-        justify-content: center; /* Centra horizontalmente */
-        align-items: center; /* Centra verticalmente */
-        text-align: center; /* Ajusta la alineación del texto */
-        margin: 0 auto; /* Centra dentro de su contenedor */
-        min-width: 90%; /* Ancho del botón adaptado */
-        padding: 0.5rem 0; /* Espaciado interno */
+        justify-content: center;
+        /* Centra horizontalmente */
+        align-items: center;
+        /* Centra verticalmente */
+        text-align: center;
+        /* Ajusta la alineación del texto */
+        margin: 0 auto;
+        /* Centra dentro de su contenedor */
+        min-width: 90%;
+        /* Ancho del botón adaptado */
+        padding: 0.5rem 0;
+        /* Espaciado interno */
     }
 
     .btnAuth-nav {
-        margin: 0; /* Elimina márgenes innecesarios */
-        position: absolute; /* Permite una ubicación precisa */
-        right: 20px; /* Alinea a la derecha */
-        top: 50%; /* Centra verticalmente respecto al contenedor */
-        transform: translateY(-50%); /* Ajusta el centro perfecto */
+        margin: 0;
+        /* Elimina márgenes innecesarios */
+        position: absolute;
+        /* Permite una ubicación precisa */
+        right: 20px;
+        /* Alinea a la derecha */
+        top: 50%;
+        /* Centra verticalmente respecto al contenedor */
+        transform: translateY(-50%);
+        /* Ajusta el centro perfecto */
     }
 
-  
+
 }
-
-

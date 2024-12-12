@@ -1,0 +1,125 @@
+/* Contenedor general */
+.reservar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    color: #ffffff;
+    font-family: 'Jaro', sans-serif;
+    text-align: center;
+    z-index: 2;
+}
+
+/* Contenedor del contenido */
+.reservar-content {
+    max-width: 600px;
+    width: 100%;
+    background: rgba(93, 88, 88, 0.7); /* Fondo semi-transparente */
+    backdrop-filter: blur(10px); /* Efecto blur */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Título */
+.reservar-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #d48019;
+}
+
+/* Subtítulo */
+.reservar-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+}
+
+/* Formulario */
+.reservar-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Grupo de formularios */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+    color: #ffffff;
+}
+
+/* Etiquetas */
+.form-group label {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* Inputs y Selects */
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #d48019;
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    outline: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    background-color: #b36916;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón */
+.reservar-button {
+    background-color: #d48019;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reservar-button:hover {
+    background-color: #b36916;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Responsividad */
+@media (max-width: 480px) {
+    .reservar-content {
+        padding: 15px;
+    }
+
+    .reservar-title {
+        font-size: 2rem;
+    }
+
+    .reservar-subtitle {
+        font-size: 1rem;
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 0.9rem;
+    }
+
+    .reservar-button {
+        font-size: 1rem;
+        padding: 8px 15px;
+    }
+}

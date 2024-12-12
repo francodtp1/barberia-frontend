@@ -93,8 +93,8 @@ const NavBar = () => {
                   aria-expanded={menuState.isExpanded}
                 >
                   <li className="list-item"><a className="nav__link" href="/">Inicio</a></li>
-                  <li className="list-item"><a className="nav__link" href="#">Ver Turnos</a></li>
-                  <li className="list-item"><a className="nav__link" href="#">Administrar Turnos</a></li>
+                  <li className="list-item"><a className="nav__link" href="/administrarTurnos">Administrar turnos</a></li>
+                  <li className="list-item"><a className="nav__link" href="#">Administrar usuarios</a></li>
                   <li className="list-item">
                     <button className="btnAuth-nav-salir" onClick={handleLogout}>
                       <p>Salir</p>

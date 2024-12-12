@@ -13,7 +13,7 @@ const Home = () => {
             <p className="home-subtitle animate-slide-up">
               Reserva tu turno ahora y vive la mejor experiencia de cuidado personal.
             </p>
-            <Link to="/turnos" className="home-button">
+            <Link to="/reservarTurnos" className="home-button">
               <FaCalendarAlt className="button-icon" />
               Reservar Turno
             </Link>

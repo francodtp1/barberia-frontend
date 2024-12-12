@@ -1,0 +1,120 @@
+/* Contenedor general */
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    /* Organiza los elementos en columna */
+    align-items: center;
+    justify-content: center;
+    /* Alinea los elementos al inicio (arriba) */
+    height: 100vh;
+    padding: 20px;
+    color: #ffffff;
+    font-family: 'Jaro', sans-serif;
+    z-index: 2;
+}
+
+/* Contenido principal */
+.admin-content-principal {
+    max-width: 600px;
+    width: 100%;
+    background: rgba(93, 88, 88, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.admin-content-secundario {
+    margin-top: 20px;
+    max-width: 600px;
+    width: 100%;
+    background: rgba(93, 88, 88, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Títulos */
+.admin-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #d48019;
+}
+
+.admin-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+}
+
+.admin-subtitle-dos {
+    color: #e0e0e0;
+    font-size: 1.0rem;
+}
+
+/* Formulario */
+.admin-form-group {
+    margin-bottom: 20px;
+    text-align: left;
+    color: #e0e0e0;
+}
+
+.admin-form-group label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.admin-form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #d48019;
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    outline: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admin-form-group input:focus {
+    background-color: #b36916;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Botón */
+.admin-button {
+    background-color: #d48019;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Jaro', sans-serif;
+    margin-top: 10px;
+}
+
+.admin-button:hover {
+    background-color: #b36916;
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.view-button {
+    background-color: #444950;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.view-button:hover {
+    background-color: #d48019;
+    
+}
