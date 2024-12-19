@@ -1,0 +1,288 @@
+.ver-turno-container {
+  font-family: 'Jaro', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  z-index: 3;
+}
+
+.ver-turnos-content {
+  margin-top: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 16px;
+  background: rgba(93, 88, 88, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+  text-align: center;
+  color: #d48019;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.custom-calendar {
+  border: none;
+  border-radius: 16px;
+  padding: 20px;
+  background: rgba(93, 88, 88, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.custom-calendar .react-calendar__navigation button {
+  color: white;
+  font-family: 'Jaro', sans-serif;
+  background: none;
+  border: none;
+}
+
+/* Deshabilitar los clics solo en el encabezado que contiene el mes y el año */
+.custom-calendar .react-calendar__navigation__label {
+  pointer-events: none;
+}
+
+.custom-calendar .react-calendar__navigation button:enabled:hover {
+  background: #838282;
+  color: white;
+}
+
+/* Quitar fondo al hacer clic en botones de navegación */
+.custom-calendar .react-calendar__navigation button:focus {
+  background: none !important;
+  outline: none;
+}
+
+.custom-calendar .react-calendar__navigation button:active {
+  background: none !important;
+  color: inherit;
+  outline: none;
+}
+
+.custom-calendar .react-calendar__tile {
+  border-radius: 10%;
+  color: white;
+  text-align: center;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.custom-calendar .react-calendar__tile:disabled {
+  background: none;
+  color: #a1a1a1;
+  cursor: not-allowed;
+}
+
+.custom-calendar .react-calendar__tile:enabled:hover {
+  background: #838282;
+  /* Gris del hover */
+  color: white;
+  transform: scale(1.1);
+}
+
+.custom-calendar .react-calendar__tile--now {
+  background: #838282;
+  /* Gris para el día actual */
+  color: white;
+  font-weight: bold;
+}
+
+.custom-calendar .react-calendar__tile--now:enabled:hover {
+  background: #838282;
+  /* Mantiene gris en hover */
+  color: white;
+  transform: scale(1.1);
+}
+
+.custom-calendar .react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: #d48019;
+  font-family: 'Jaro', sans-serif;
+  padding-bottom: 10px;
+}
+
+.custom-calendar .react-calendar__tile .highlight {
+  background: #d48019;
+  /* Color de fondo del marcador */
+  color: white;
+  width: 6px;
+  height: 6px;
+  border-radius: 90%;
+  margin: auto;
+  box-shadow: 0 0 8px rgba(65, 48, 26, 0.6);
+}
+
+.turnos-dia-view {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.turnos-list-modern {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  /* Habilitar desplazamiento si hay muchos turnos */
+  max-height: 300px;
+  /* Ajusta según lo que necesites */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  /* Estilo para navegadores compatibles */
+  scrollbar-color: #d48019 transparent;
+}
+
+/* Estilo del scroll en navegadores Webkit (Chrome, Edge, etc.) */
+.turnos-list-modern::-webkit-scrollbar {
+  width: 8px;
+}
+
+.turnos-list-modern::-webkit-scrollbar-thumb {
+  background-color: #d48019;
+  border-radius: 4px;
+}
+
+.turnos-list-modern::-webkit-scrollbar-thumb:hover {
+  background-color: #b36916;
+}
+
+.turnos-list-modern::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.turno-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.turno-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.turno-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.turno-hora {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.turno-cliente {
+  font-size: 1rem;
+  color: #666;
+}
+
+.cancel-button {
+  background: #d41919;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.cancel-button:hover {
+  background: #ad0d0d;
+  transform: scale(1.05);
+}
+
+.back-button {
+  background-color: #d48019;
+  color: #ffffff;
+  padding: 5px 10px;
+  font-size: 1.0rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Jaro', sans-serif;
+  margin-top: 10px;
+}
+
+.back-button:hover {
+  background-color: #b36916;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ver-turno-container.animate {
+  animation: fadeIn 1.0s ease-in-out;
+}
+
+/* Small screen adjustments */
+@media (max-width: 568px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .ver-turnos-content {
+    max-width: 350px;
+    width: 100%;
+  }
+}
+
+.back-to-calendar-button {
+  display: block;
+  /* Convierte el botón en un bloque para centrarlo */
+  margin: 10px auto;
+  /* Margen superior e inferior y auto para centrar */
+  background-color: #d48019;
+  color: #ffffff;
+  padding: 5px 10px;
+  font-size: 1.0rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Jaro', sans-serif;
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
+.back-to-calendar-button:hover {
+  background-color: #b36916;
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}

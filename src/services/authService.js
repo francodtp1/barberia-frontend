@@ -8,25 +8,19 @@ export const registerUser = async (userData) => {
     const response = await axios.post(`${API_URL}/register`, userData);
     return response.data;
   } catch (error) {
-       // Retornar más detalles del error del backend
-       const errorMessage = error.response?.data?.message || 'Error al registrar';
-       const statusCode = error.response?.status || 500; // Capturar el código de estado
-       throw { message: errorMessage, status: statusCode };
+    handleError(error, 'Error al registrar');
   }
 };
 
 // Inicio de sesión
 export const loginUser = async (userData) => {
   try {
-      const response = await axios.post(`${API_URL}/login`, userData, {
-          withCredentials: true, // Permitir envío de cookies
-      });
-      return response.data;
+    const response = await axios.post(`${API_URL}/login`, userData, {
+      withCredentials: true, // Permitir envío de cookies
+    });
+    return response.data;
   } catch (error) {
-    // Retornar más detalles del error del backend
-    const errorMessage = error.response?.data?.message || 'Error al iniciar sesión';
-    const statusCode = error.response?.status || 500; // Capturar el código de estado
-    throw { message: errorMessage, status: statusCode };
+    handleError(error, 'Error al iniciar sesión');
   }
 };
 
@@ -36,7 +30,7 @@ export const logoutUser = async () => {
     const response = await axios.post(`${API_URL}/logout`, {}, { withCredentials: true });
     return response.data;
   } catch (error) {
-    throw error.response?.data || { message: 'Error al cerrar sesión' };
+    handleError(error, 'Error al cerrar sesión');
   }
 };
 
@@ -46,8 +40,40 @@ export const checkSession = async () => {
     const response = await axios.get(`${API_URL}/check-session`, { withCredentials: true });
     return response.data;
   } catch (error) {
-    console.error('Error al verificar la sesión:', error.response?.data || error.message);
-    throw error.response?.data || { message: 'Sesión no activa' };
+    handleError(error, 'Sesión no activa');
   }
 };
 
+// Verificar si el usuario tiene un turno pendiente
+export const checkUsuarioConTurno = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/usuario/turno`, {
+      withCredentials: true, // Permitir envío de cookies para autenticación
+    });
+    return response.data;
+  } catch (error) {
+    handleError(error, 'Error al verificar el turno');
+  }
+};
+
+// Eliminar un usuario (solo admin puede hacerlo)
+export const deleteUser = async (userId) => {
+  try {
+    const response = await axios.delete(`${API_URL}/usuario/${userId}`, { withCredentials: true });
+    return response.data;
+  } catch (error) {
+    handleError(error, 'Error al eliminar el usuario');
+  }
+};
+
+// Manejo centralizado de errores
+const handleError = (error, defaultMessage) => {
+  const errorMessage = error.response?.data?.message || defaultMessage;
+  const statusCode = error.response?.status || 500;
+
+  if (statusCode === 401 && errorMessage === 'Sesión expirada') {
+    throw { message: 'Sesión expirada', status: 401 };
+  }
+
+  throw { message: errorMessage, status: statusCode };
+};

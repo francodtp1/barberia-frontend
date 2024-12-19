@@ -60,7 +60,7 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
 
       setLoginForm({ email: '', password: '' });
       setError(null);
-      onAuthSuccess(); // Notificar al NavBar
+      onAuthSuccess();
     } catch (err) {
       console.error('Error en login:', err);
 

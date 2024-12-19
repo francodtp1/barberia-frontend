@@ -2,42 +2,71 @@ import { useEffect, useState } from "react";
 import "../styles/navBar.css";
 import AuthModal from "./Auth";
 import { checkSession, logoutUser } from '../services/authService';
-import Swal from 'sweetalert2';  // Importa SweetAlert2
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
   const [menuState, setMenuState] = useState({
     isExpanded: false,
     showModal: false,
     isAuthenticated: false,
+    userRole: null, // Estado para almacenar el rol del usuario
   });
 
-  useEffect(() => {
-    const verifySession = async () => {
-      try {
-        await checkSession();
-        setMenuState((prev) => ({ ...prev, isAuthenticated: true }));
-      } catch {
-        setMenuState((prev) => ({ ...prev, isAuthenticated: false }));
+  const navigate = useNavigate();
+  const [hasCheckedSession, setHasCheckedSession] = useState(false); // Evita múltiples verificaciones
+
+  const verifySession = async () => {
+    try {
+      const sessionData = await checkSession();
+      console.log("Usuario autenticado:", sessionData.user); // Solo log una vez
+      setMenuState((prev) => ({
+        ...prev,
+        isAuthenticated: true,
+        userRole: sessionData.user.role,
+      }));
+    } catch (error) {
+      if (error.message === 'Sesión expirada') {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Sesión expirada',
+          text: 'Tu sesión ha expirado. Por favor, inicia sesión nuevamente.',
+        });
       }
-    };
-    verifySession();
-  }, []);
+      setMenuState((prev) => ({
+        ...prev,
+        isAuthenticated: false,
+        userRole: null,
+      }));
+      
+    }
+  };
+
+  useEffect(() => {
+    if (!hasCheckedSession) {
+      verifySession();
+      setHasCheckedSession(true); // Marca como ejecutado
+    }
+  }, [hasCheckedSession]);
 
   const handleLogout = async () => {
     try {
       await logoutUser();
-      setMenuState((prev) => ({ ...prev, isAuthenticated: false, isExpanded: false }));
-      
-      // Muestra un mensaje de éxito al cerrar sesión
+      setMenuState((prev) => ({
+        ...prev,
+        isAuthenticated: false,
+        userRole: null,
+        isExpanded: false,
+      }));
+
       Swal.fire({
         icon: 'success',
         title: '¡Has cerrado sesión!',
         text: 'Hasta pronto.',
       });
+      navigate('/');
     } catch (error) {
       console.error('Error al cerrar sesión:', error.message);
-      
-      // Muestra un mensaje de error si ocurre un problema al cerrar sesión
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -47,9 +76,11 @@ const NavBar = () => {
   };
 
   const handleAuthSuccess = () => {
-    setMenuState((prev) => ({ ...prev, isAuthenticated: true, showModal: false }));
-    
-    // Muestra un mensaje de éxito al autenticar al usuario
+    setMenuState((prev) => ({
+      ...prev,
+      isAuthenticated: true,
+      showModal: false,
+    }));
     Swal.fire({
       icon: 'success',
       title: '¡Bienvenido!',
@@ -93,8 +124,13 @@ const NavBar = () => {
                   aria-expanded={menuState.isExpanded}
                 >
                   <li className="list-item"><a className="nav__link" href="/">Inicio</a></li>
-                  <li className="list-item"><a className="nav__link" href="/administrarTurnos">Administrar turnos</a></li>
-                  <li className="list-item"><a className="nav__link" href="#">Administrar usuarios</a></li>
+                  {menuState.userRole === 'admin' && (
+                    <>
+                      <li className="list-item"><a className="nav__link" href="/verTurnos">Turnos reservados</a></li>
+                      <li className="list-item"><a className="nav__link" href="/administrarTurnos">Administrar turnos</a></li>
+                      <li className="list-item"><a className="nav__link" href="/administrarUsuarios">Administrar usuarios</a></li>
+                    </>
+                  )}
                   <li className="list-item">
                     <button className="btnAuth-nav-salir" onClick={handleLogout}>
                       <p>Salir</p>
@@ -113,7 +149,10 @@ const NavBar = () => {
       {menuState.showModal && (
         <AuthModal
           onClose={toggleModal}
-          onAuthSuccess={handleAuthSuccess}
+          onAuthSuccess={() => {
+            verifySession();
+            handleAuthSuccess();
+          }}
         />
       )}
     </div>

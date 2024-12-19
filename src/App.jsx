@@ -1,34 +1,69 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar.jsx';
-import Loader from './libs/Loader.jsx';
-import { useState, useEffect } from 'react';
 import Home from './pages/Home.jsx';
 import ReservarTurnos from './pages/ReservarTurnos.jsx';
 import AdministrarTurnos from './pages/AdministrarTurnos.jsx';
+import VerTurnos from './pages/VerTurnos.jsx';
+import ProtectedRoute from './libs/ProtectedRoute.jsx';
+import { AuthProvider } from './libs/AuthContext.jsx';
+import AdministrarUsuarios from './pages/AdministrarUsuarios.jsx'
+import PreciosBarberia from './components/Precios.jsx';
 
 function App() {
-  const [loading, setLoading] = useState(true); // Estado para controlar si el loader se muestra
 
-  useEffect(() => {
-    // Simulamos un tiempo de carga, por ejemplo, cuando se cargan los datos o se hace una solicitud a la API
-    setTimeout(() => {
-      setLoading(false); // Después de 3 segundos, dejamos de mostrar el loader
-    }, 800);
-  }, []);
 
   return (
-    <Router>
-      {loading && <Loader />}
-      <div className="overlay"></div>
-      <div className="container">
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/reservarTurnos" element={<ReservarTurnos />} />
-          <Route path="/administrarTurnos" element={<AdministrarTurnos />} />
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div className="overlay"></div>
+        <div className="container">
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/verTurnos"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <VerTurnos />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reservarTurnos"
+              element={
+                <ProtectedRoute >
+                  <ReservarTurnos />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/administrarTurnos"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <AdministrarTurnos />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/administrarUsuarios"
+              element={
+                <ProtectedRoute requiredRole="admin">
+                  <AdministrarUsuarios />
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/precios"
+              element={
+                <ProtectedRoute>
+                  <PreciosBarberia />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 

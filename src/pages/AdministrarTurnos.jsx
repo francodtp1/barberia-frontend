@@ -10,6 +10,8 @@ const AdministrarTurnos = () => {
   const [newTimeSlot, setNewTimeSlot] = useState("");
   const [isModalOpen, setModalOpen] = useState(false);
   const [turnosDisponibles, setTurnosDisponibles] = useState([]);
+  const [animate, setAnimate] = useState(false);
+
 
   // Obtener todos los turnos al cargar la página
   useEffect(() => {
@@ -27,6 +29,14 @@ const AdministrarTurnos = () => {
       }
     };
     fetchTurnos();
+
+    // Retraso de 1 segundo para iniciar la animación
+    const timer = setTimeout(() => {
+      setAnimate(true);
+    });
+
+    return () => clearTimeout(timer); // Limpiar el temporizador
+
   }, [selectedDate, isModalOpen]);
 
   const addTimeSlot = async (e) => {
@@ -113,7 +123,7 @@ const AdministrarTurnos = () => {
   };
 
   return (
-    <div className="admin-container">
+    <div className={`admin-container ${animate ? "animate" : ""}`}>
       <div className="admin-content-principal">
         <h1 className="admin-title">Administrar Turnos</h1>
         <p className="admin-subtitle">Selecciona una fecha y agrega horarios disponibles.</p>

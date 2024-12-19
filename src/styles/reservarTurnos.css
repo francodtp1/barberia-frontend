@@ -13,96 +13,36 @@
 
 /* Contenedor del contenido */
 .reservar-content {
-    max-width: 600px;
+    max-width: 390px;
     width: 100%;
-    background: rgba(93, 88, 88, 0.7); /* Fondo semi-transparente */
-    backdrop-filter: blur(10px); /* Efecto blur */
+    background: rgba(93, 88, 88, 0.7);
+    backdrop-filter: blur(10px);
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
 }
 
 /* Título */
 .reservar-title {
     font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #d48019;
 }
 
-/* Subtítulo */
+/* Subtítulo debajo del título */
 .reservar-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #e0e0e0;
-}
-
-/* Formulario */
-.reservar-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-/* Grupo de formularios */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 5px;
-    color: #ffffff;
-}
-
-/* Etiquetas */
-.form-group label {
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-/* Inputs y Selects */
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #d48019;
-    color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    outline: none;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    background-color: #b36916;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Botón */
-.reservar-button {
-    background-color: #d48019;
-    color: #ffffff;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.reservar-button:hover {
-    background-color: #b36916;
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    font-size: 0.9rem;
+    color: #cdc3c3;
+    margin-bottom: 10px;
 }
 
 /* Responsividad */
 @media (max-width: 480px) {
     .reservar-content {
         padding: 15px;
+        max-width: 350px;
+        width: 100%;
     }
 
     .reservar-title {
@@ -113,13 +53,342 @@
         font-size: 1rem;
     }
 
-    .form-group input,
-    .form-group select {
-        font-size: 0.9rem;
+    .tit-seleccionar {
+        font-size: 20px;
     }
 
-    .reservar-button {
-        font-size: 1rem;
-        padding: 8px 15px;
+}
+
+.date-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.arrow-icon {
+    font-size: 14px;
+    cursor: pointer;
+    color: #d48019;
+    transition: transform 0.2s ease;
+}
+
+.arrow-icon:hover {
+    transform: scale(1.2);
+}
+
+.slots-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 5px;
+}
+
+.calendar-user {
+    border: none;
+    border-radius: 16px;
+    padding: 20px;
+    background: rgba(93, 88, 88, 0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-user .react-calendar__navigation button {
+    color: white;
+    font-family: 'Jaro', sans-serif;
+    background: none;
+    border: none;
+}
+
+/* Deshabilitar los clics solo en el encabezado que contiene el mes y el año */
+.calendar-user .react-calendar__navigation__label {
+    pointer-events: none;
+}
+
+.calendar-user .react-calendar__navigation button:enabled:hover {
+    background: #838282;
+    color: white;
+}
+
+/* Quitar fondo al hacer clic en botones de navegación */
+.calendar-user .react-calendar__navigation button:focus {
+    background: none !important;
+    outline: none;
+}
+
+.calendar-user .react-calendar__navigation button:active {
+    background: none !important;
+    color: inherit;
+    outline: none;
+}
+
+.calendar-user .react-calendar__tile .highlightR {
+    background: #d48019;
+    /* Color de fondo del marcador */
+    color: white;
+    width: 6px;
+    height: 6px;
+    border-radius: 90%;
+    margin: auto;
+    box-shadow: 0 0 8px rgba(65, 48, 26, 0.6);
+}
+
+.react-calendar__tile--active,
+.no-highlight {
+    background: none !important;
+    /* Elimina el fondo azul */
+    color: inherit !important;
+    /* Mantiene el color del texto original */
+    border: none !important;
+    /* Elimina bordes adicionales */
+}
+
+.calendar-user .react-calendar__tile {
+    border-radius: 10%;
+    color: white;
+    text-align: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.calendar-user .react-calendar__tile:disabled {
+    background: none;
+    color: #a1a1a1;
+    cursor: not-allowed;
+}
+
+.calendar-user .react-calendar__tile:enabled:hover {
+    background: #838282;
+    /* Gris del hover */
+    color: white;
+    transform: scale(1.1);
+}
+
+.calendar-user .react-calendar__tile--now {
+    background: #838282;
+    /* Gris para el día actual */
+    color: white;
+
+}
+
+.calendar-user .react-calendar__tile--now:enabled:hover {
+    background: #838282;
+    /* Mantiene gris en hover */
+    color: white;
+    transform: scale(1.1);
+}
+
+.calendar-user .react-calendar__month-view__weekdays {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: #d48019;
+    font-family: 'Jaro', sans-serif;
+    padding-bottom: 10px;
+}
+
+.calendar-user .react-calendar__tile .highlight {
+    background: #d48019;
+    color: white;
+    width: 6px;
+    height: 6px;
+    border-radius: 90%;
+    margin: auto;
+    box-shadow: 0 0 8px rgba(65, 48, 26, 0.6);
+}
+
+/* General */
+.modal-seleccionar {
+    background: rgba(93, 88, 88, 0.7);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    /* Ocultar inicialmente */
+    animation: fadeInModal 0.3s ease-out forwards;
+    /* Animar la opacidad */
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+        /* Inicia más arriba */
     }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+        /* Termina centrado */
+    }
+}
+
+.tit-seleccionar {
+    font-size: 1.2rem;
+    color: #d48019;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.subt-seleccionar {
+    color: #ffffff;
+    margin-bottom: 5px;
+}
+
+.error-message {
+    color: #838282;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Botones */
+.slot-button {
+    font-family: 'Jaro', sans-serif;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #d48019;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 5px;
+}
+
+.slot-button:hover {
+    background-color: #b36916;
+    transform: translateY(-3px);
+}
+
+.close-icon-button-seleccionar {
+    position: absolute;
+    top: 10px;
+    right: 7px;
+    background: none;
+    border: none;
+    color: #b1a8a8;
+    font-size: 1.0rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1001;
+    /* Asegúrate de que esté por encima del contenido del modal */
+}
+
+.close-icon-button-seleccionar:hover {
+    color: #ff4d4d;
+}
+
+/* Contenedor de turno pendiente */
+.turno-pendiente {
+    background: rgba(93, 88, 88, 0.8);
+    /* Fondo semi-transparente */
+    color: #ffffff;
+    /* Texto blanco */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    /* Sombra suave */
+    text-align: center;
+    max-width: 400px;
+    margin: 20px auto;
+    animation: fadeInModalP 1.2s ease-out forwards;
+    /* Animación de entrada */
+}
+
+/* Animación de fade-in */
+@keyframes fadeInModalP {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Título de turno pendiente */
+.turno-pendiente p {
+    font-size: 1.0rem;
+    margin: 10px 0;
+    color: #e1dcdc;
+    font-weight: normal;
+    /* Color dorado para el texto */
+}
+
+/* Fecha y hora con color dorado */
+.turno-pendiente .fecha,
+.turno-pendiente .hora {
+    color: #d48019;
+    /* Color dorado */
+}
+
+/* Responsividad */
+@media (max-width: 480px) {
+    .turno-pendiente {
+        max-width: 350px;
+        padding: 15px;
+    }
+
+    .turno-pendiente p {
+        font-size: 1rem;
+    }
+
+    .turno-pendiente .back-to-calendar-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.reservar-container.animate {
+    animation: fadeIn 1.0s ease-in-out;
 }
