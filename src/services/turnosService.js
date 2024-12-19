@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4000/api/turnos';
+const API_URL = 'https://api.guribarber.site/api/turnos';
 
 // Crear un turno disponible
 export const createTurno = async (turnoData) => {

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4000/api/usuarios';
+const API_URL = 'https://api.guribarber.site/api/usuarios';
+
 
 // Obtener todos los usuarios
 export const getUsuarios = async () => {

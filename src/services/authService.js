@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:4000/api/auth';
+const API_URL = 'https://api.guribarber.site/api/auth';
 
 // Registro de usuario
 export const registerUser = async (userData) => {
