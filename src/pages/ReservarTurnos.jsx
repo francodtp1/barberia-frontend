@@ -31,11 +31,14 @@ const ReservarTurnos = () => {
             'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
         ];
-        // Usar toLocaleDateString para obtener la fecha en la zona horaria local
-        const localDate = new Date(date);
-        const localDateString = localDate.toLocaleDateString('es-ES', { timeZone: 'UTC' });
 
-        return `${days[localDate.getDay()]} ${localDate.getDate()} de ${months[localDate.getMonth()]}`;
+        // Convertir la fecha a la zona horaria local
+        const localDate = new Date(date);
+        const dayOfWeek = days[localDate.getDay()];
+        const dayOfMonth = localDate.getDate();
+        const month = months[localDate.getMonth()];
+
+        return `${dayOfWeek} ${dayOfMonth} de ${month}`;
     };
 
     useEffect(() => {
