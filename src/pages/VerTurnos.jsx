@@ -46,16 +46,17 @@ const VerTurnos = () => {
   useEffect(() => {
     console.log("Días con turnos:", diasConTurnos);
   }, [diasConTurnos]);
-  
+
   const handleDayClick = (date) => {
+    const selectedDate = date.toISOString().split('T')[0];
     const turnosDelDia = turnos
-      .filter(
-        (turno) => new Date(turno.fecha).toDateString() === date.toDateString()
-      )
+      .filter((turno) => turno.fecha.split('T')[0] === selectedDate)
       .sort((a, b) => a.hora.localeCompare(b.hora));
+
     setTurnosDia(turnosDelDia);
     setFechaSeleccionada(date);
   };
+
 
   const handleBackToCalendar = () => {
     setFechaSeleccionada(null);
