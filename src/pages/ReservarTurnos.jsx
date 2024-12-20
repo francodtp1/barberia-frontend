@@ -31,14 +31,8 @@ const ReservarTurnos = () => {
             'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
         ];
-
-        // Aseguramos que la fecha esté en la zona horaria local
-        const localDate = new Date(date);
-        localDate.setMinutes(localDate.getMinutes() - localDate.getTimezoneOffset()); // Ajustamos a la zona horaria local
-
-        return `${days[localDate.getDay()]} ${localDate.getDate()} de ${months[localDate.getMonth()]}`;
+        return `${days[date.getDay()]} ${date.getDate()} de ${months[date.getMonth()]}`;
     };
-
 
     useEffect(() => {
         const fetchSession = async () => {
@@ -207,17 +201,18 @@ const ReservarTurnos = () => {
                 <p className="reservar-subtitle">
                     Las fechas con el punto indicadas en el calendario son aquellas en las que hay turnos disponibles. Selecciona una de ellas para reservar tu turno.
                 </p>
-                {turnoPendiente && (
+                {turnoPendiente && (  // Si hay un turno pendiente, lo mostramos en el contenedor
                     <div className="turno-pendiente">
-                        <p><strong>Ya tienes un turno pendiente.</strong></p>
                         <p><strong>Fecha:</strong> <span className="fecha">{formatReadableDate(new Date(turnoPendiente.fecha))}</span></p>
+                        <p><strong>Fecha:</strong> <span className="fecha">{turnoPendiente.fecha}</span></p>
                         <p><strong>Hora:</strong> <span className="hora">{turnoPendiente.hora}</span></p>
                         <button className="back-to-calendar-button" onClick={() => navigate('/')}>
                             Volver
                         </button>
                     </div>
-                )}
 
+
+                )}
                 {!turnoPendiente && (
                     <>
                         <Calendar

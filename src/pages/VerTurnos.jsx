@@ -24,7 +24,7 @@ const VerTurnos = () => {
           new Set(data.map((turno) => new Date(turno.fecha).toDateString()))
         );
         setDiasConTurnos(diasUnicos);
-
+        console.log("Días con turnos:", diasUnicos);
         setLoading(false);
       } catch (err) {
         setError(err.message || 'Error al cargar los turnos');
@@ -43,11 +43,14 @@ const VerTurnos = () => {
   }, []);
 
   const handleDayClick = (date) => {
+    console.log("Fecha seleccionada:", date); // Agregado para depurar
     const turnosDelDia = turnos
       .filter(
         (turno) => new Date(turno.fecha).toDateString() === date.toDateString()
       )
       .sort((a, b) => a.hora.localeCompare(b.hora));
+
+    console.log("Turnos para el día:", turnosDelDia);
     setTurnosDia(turnosDelDia);
     setFechaSeleccionada(date);
   };
