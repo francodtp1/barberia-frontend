@@ -72,13 +72,21 @@ const ReservarTurnos = () => {
                     const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
 
                     setTurnoPendiente({ fecha, hora });  // Guardamos el turno pendiente en el estado
-                    setAvailableSlots([]);
+
+                    // Mostrar alerta y redirigir al inicio
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Turno pendiente',
+                        text: `Ya tienes un turno pendiente para el ${formatReadableDate(new Date(fecha))} a las ${hora}.`,
+                    }).then(() => {
+                        navigate('/');  // Redirigir al inicio
+                    });
+
+                    setAvailableSlots([]);  // No mostrar turnos disponibles si ya hay uno pendiente
                     return;
                 }
 
                 const turnos = await getTurnosDisponibles();
-
-                console.log("los turnos son: ", turnos)
                 const filteredSlots = turnos.filter((turno) => {
                     const turnoDate = new Date(turno.fecha).toISOString().split('T')[0];
                     return turnoDate === formatDate(selectedDate);
@@ -134,7 +142,7 @@ const ReservarTurnos = () => {
                 title: 'Turno reservado',
                 text: `Turno confirmado para el ${formatReadableDate(selectedDate)} a las ${slot}.`,
             }).then(() => {
-                navigate('/');
+                navigate('/');  // Redirigir al inicio después de confirmar la reserva
             });
         } catch (error) {
             console.error('Error al reservar el turno:', error);
@@ -209,16 +217,6 @@ const ReservarTurnos = () => {
                 <p className="reservar-subtitle">
                     Las fechas con el punto indicadas en el calendario son aquellas en las que hay turnos disponibles. Selecciona una de ellas para reservar tu turno.
                 </p>
-                {turnoPendiente && (  // Si hay un turno pendiente, lo mostramos en el contenedor
-                    <div className="turno-pendiente">
-                        <p><strong>Fecha:</strong> <span className="fecha">{formatReadableDate(selectedDate)}</span></p>
-                        <p><strong>Fecha:</strong> <span className="fecha">{turnoPendiente.fecha}</span></p>
-                        <p><strong>Hora:</strong> <span className="hora">{turnoPendiente.hora}</span></p>
-                        <button className="back-to-calendar-button" onClick={() => navigate('/')}>
-                            Volver
-                        </button>
-                    </div>
-                )}
                 {!turnoPendiente && (
                     <>
                         <Calendar
