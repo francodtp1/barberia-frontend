@@ -20,6 +20,7 @@ const VerTurnos = () => {
         const data = await getTurnosReservados();
         setTurnos(data);
 
+        console.log("la data es ", data)
         const diasUnicos = Array.from(
           new Set(data.map((turno) => new Date(turno.fecha).toISOString().split('T')[0]))
         );
