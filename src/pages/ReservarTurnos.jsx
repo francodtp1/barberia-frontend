@@ -81,7 +81,7 @@ const ReservarTurnos = () => {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Turno pendiente',
-                        text: `Ya tienes un turno pendiente para el ${formatReadableDate(new Date(fecha))} a las ${hora}.`,
+                        text: `Ya tienes un turno pendiente para el ${formatReadableDate(fecha)} a las ${hora}.`,
                     }).then(() => {
                         navigate('/');  // Redirigir al inicio
                     });
