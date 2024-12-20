@@ -26,7 +26,8 @@ const ReservarTurnos = () => {
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     const formatReadableDate = (date) => {
-        console.log("Fecha recibida para formatear:", date);
+        const formatDate = (date) => date.toISOString().split('T')[0];
+        console.log("Fecha recibida para formatear:", formatDate);
 
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         const months = [
@@ -35,7 +36,7 @@ const ReservarTurnos = () => {
         ];
 
         // Convertir la fecha a la zona horaria local (Argentina)
-        const localDate = new Date(date);
+        const localDate = new Date(formatDate);
         console.log("Fecha local (sin ajuste):", localDate);  // Ver la fecha local antes de ajustar la zona horaria
 
         const offset = localDate.getTimezoneOffset() / 60; // Obtener la diferencia horaria con UTC en horas
