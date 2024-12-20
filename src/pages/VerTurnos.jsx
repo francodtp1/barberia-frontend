@@ -18,6 +18,7 @@ const VerTurnos = () => {
     const fetchTurnos = async () => {
       try {
         const data = await getTurnosReservados();
+        console.log("lo que traigo es ", data)
         setTurnos(data);
 
         const diasUnicos = Array.from(
