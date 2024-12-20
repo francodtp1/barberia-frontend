@@ -203,7 +203,7 @@ const ReservarTurnos = () => {
                 </p>
                 {turnoPendiente && (  // Si hay un turno pendiente, lo mostramos en el contenedor
                     <div className="turno-pendiente">
-                        <p><strong>Fecha:</strong> <span className="fecha">{formatReadableDate(new Date(turnoPendiente.fecha))}</span></p>
+                        <p><strong>Fecha:</strong> <span className="fecha">{formatReadableDate(new Date(turnoPendiente.fecha).toISOString().split('T')[0])}</span></p> 
                         <p><strong>Fecha:</strong> <span className="fecha">{turnoPendiente.fecha}</span></p>
                         <p><strong>Hora:</strong> <span className="hora">{turnoPendiente.hora}</span></p>
                         <button className="back-to-calendar-button" onClick={() => navigate('/')}>
