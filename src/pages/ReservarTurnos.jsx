@@ -32,8 +32,11 @@ const ReservarTurnos = () => {
             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
         ];
 
-        // Convertir la fecha a la zona horaria local
+        // Convertir la fecha a la zona horaria local (Argentina)
         const localDate = new Date(date);
+        const offset = localDate.getTimezoneOffset() / 60; // Obtener la diferencia horaria con UTC en horas
+        localDate.setHours(localDate.getHours() - offset + 3); // Ajustar a UTC-3 (Argentina)
+
         const dayOfWeek = days[localDate.getDay()];
         const dayOfMonth = localDate.getDate();
         const month = months[localDate.getMonth()];
