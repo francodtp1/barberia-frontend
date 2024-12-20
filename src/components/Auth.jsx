@@ -55,6 +55,8 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
         icon: 'success',
         title: 'Inicio de sesión exitoso',
         text: '¡Bienvenido de nuevo!',
+      }).then(() => {
+        window.location.reload(); // Recarga la página después de aceptar la alerta
       });
       setLoginForm({ email: '', password: '' });
       setError(null);
@@ -69,6 +71,7 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
       setError(err.message || 'Error desconocido en inicio de sesión');
     }
   };
+
 
   const handleModalClick = (e) => {
     if (e.target === e.currentTarget) {
