@@ -76,6 +76,24 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
     }
   };
 
+  const handleInputFocus = () => {
+    if (window.innerWidth <= 768) { // Solo aplica en móviles
+      document.querySelector("meta[name=viewport]").setAttribute(
+        "content",
+        "width=device-width, initial-scale=1.0, maximum-scale=2.0"
+      );
+    }
+  };
+
+  const handleInputBlur = () => {
+    if (window.innerWidth <= 768) { // Solo aplica en móviles
+      document.querySelector("meta[name=viewport]").setAttribute(
+        "content",
+        "width=device-width, initial-scale=1.0, maximum-scale=1.0"
+      );
+    }
+  };
+
   return (
     <div className="modal-overlay" onClick={handleModalClick}>
       <div className="auth-box">
@@ -90,6 +108,8 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
               className="inputs"
               value={registerForm.nombre}
               onChange={handleRegisterInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
               required
             />
             <input
@@ -99,6 +119,8 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
               className="inputs"
               value={registerForm.email}
               onChange={handleRegisterInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
               required
             />
             <div className="password-container">
@@ -109,6 +131,8 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
                 className="inputs"
                 value={registerForm.password}
                 onChange={handleRegisterInputChange}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
                 required
               />
               <button
@@ -126,6 +150,8 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
               className="inputs"
               value={registerForm.telefono}
               onChange={handleRegisterInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
               required
             />
             <button type="submit" className="btnAuth">Registrarse</button>
@@ -141,6 +167,8 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
               className="inputs"
               value={loginForm.email}
               onChange={handleLoginInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
               required
             />
             <div className="password-container">
@@ -151,6 +179,8 @@ const AuthModal = ({ onClose, onAuthSuccess }) => {
                 className="inputs"
                 value={loginForm.password}
                 onChange={handleLoginInputChange}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
                 required
               />
               <button
