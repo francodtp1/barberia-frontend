@@ -63,9 +63,9 @@ const ReservarTurnos = () => {
 
                 if (turnoStatus.message === 'Ya tienes un turno pendiente.') {
                     const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
-                    const formattedDate = formatReadableDate(new Date(fecha));
+                    
 
-                    setTurnoPendiente({ fecha: formattedDate, hora });  // Guardamos el turno pendiente en el estado
+                    setTurnoPendiente({ fecha, hora });  // Guardamos el turno pendiente en el estado
                     setAvailableSlots([]);
                     return;
                 }
