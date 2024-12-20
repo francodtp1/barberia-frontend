@@ -78,7 +78,7 @@ const ReservarTurnos = () => {
 
                 const turnos = await getTurnosDisponibles();
 
-                console.log("los turnos son: ", turnos )
+                console.log("los turnos son: ", turnos)
                 const filteredSlots = turnos.filter((turno) => {
                     const turnoDate = new Date(turno.fecha).toISOString().split('T')[0];
                     return turnoDate === formatDate(selectedDate);
@@ -211,7 +211,7 @@ const ReservarTurnos = () => {
                 </p>
                 {turnoPendiente && (  // Si hay un turno pendiente, lo mostramos en el contenedor
                     <div className="turno-pendiente">
-                        <p><strong>Fecha:</strong> <span className="fecha">{formatReadableDate(new Date(turnoPendiente.fecha))}</span></p>
+                        <p><strong>Fecha:</strong> <span className="fecha">{formatReadableDate(selectedDate)}</span></p>
                         <p><strong>Fecha:</strong> <span className="fecha">{turnoPendiente.fecha}</span></p>
                         <p><strong>Hora:</strong> <span className="hora">{turnoPendiente.hora}</span></p>
                         <button className="back-to-calendar-button" onClick={() => navigate('/')}>
