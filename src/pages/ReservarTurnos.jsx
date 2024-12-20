@@ -71,6 +71,7 @@ const ReservarTurnos = () => {
                 if (turnoStatus.message === 'Ya tienes un turno pendiente.') {
                     const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
 
+                    console.log("la fecha es ", fecha)
                     setTurnoPendiente({ fecha, hora });  // Guardamos el turno pendiente en el estado
 
                     // Mostrar alerta y redirigir al inicio
