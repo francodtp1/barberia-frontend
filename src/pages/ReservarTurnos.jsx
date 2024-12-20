@@ -18,7 +18,7 @@ const ReservarTurnos = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [datesWithAvailableSlots, setDatesWithAvailableSlots] = useState([]);
-    const [turnoPendiente, setTurnoPendiente] = useState(null);  // Nueva variable de estado
+    const [turnoPendiente, setTurnoPendiente] = useState(null);
     const [animate, setAnimate] = useState(false);
 
     const navigate = useNavigate();
@@ -26,21 +26,13 @@ const ReservarTurnos = () => {
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     const formatReadableDate = (date) => {
-        console.log("la fecha que recibo para pasar ", date);
-
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         const months = [
             'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
         ];
-
-        // Convertimos la fecha a UTC explícitamente y extraemos sus partes
         const localDate = new Date(date);
-        const dayOfWeek = days[localDate.getUTCDay()]; // Usar UTC para el día de la semana
-        const dayOfMonth = localDate.getUTCDate(); // Usar UTC para el día del mes
-        const month = months[localDate.getUTCMonth()]; // Usar UTC para el mes
-
-        return `${dayOfWeek} ${dayOfMonth} de ${month}`;
+        return `${days[localDate.getUTCDay()]} ${localDate.getUTCDate()} de ${months[localDate.getUTCMonth()]}`;
     };
 
     useEffect(() => {
@@ -71,10 +63,8 @@ const ReservarTurnos = () => {
                 const turnoStatus = await checkUsuarioConTurno();
 
                 if (turnoStatus.message === 'Ya tienes un turno pendiente.') {
-                    const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
-
-
-                    setTurnoPendiente({ fecha, hora });  // Guardamos el turno pendiente en el estado
+                    const { fecha, hora } = turnoStatus.turno;
+                    setTurnoPendiente({ fecha, hora });
                     setAvailableSlots([]);
                     return;
                 }
@@ -93,18 +83,24 @@ const ReservarTurnos = () => {
                 console.error('Error al verificar o cargar turnos:', error.message);
                 setError(error.message);
                 setAvailableSlots([]);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchTurnos();
-        // Configuramos el temporizador para iniciar la animación
-        const timer = setTimeout(() => {
-            setAnimate(true);
-        });
 
-        return () => clearTimeout(timer); // Limpiamos el temporizador
-
+        const timer = setTimeout(() => setAnimate(true), 500);
+        return () => clearTimeout(timer);
     }, [selectedDate]);
+
+    if (loading) {
+        return (
+            <div className="loading-container">
+                <div className="spinner"></div>
+            </div>
+        );
+    }
 
     if (error) return <div className="error">{error}</div>;
 
@@ -199,10 +195,6 @@ const ReservarTurnos = () => {
         openSlotModal();
     };
 
-    if (loading) {
-        return <p>Cargando...</p>;
-    }
-
     return (
         <div className={`reservar-container ${animate ? 'animate' : ''}`}>
             <div className="reservar-content">
@@ -210,7 +202,7 @@ const ReservarTurnos = () => {
                 <p className="reservar-subtitle">
                     Las fechas con el punto indicadas en el calendario son aquellas en las que hay turnos disponibles. Selecciona una de ellas para reservar tu turno.
                 </p>
-                {turnoPendiente && (  // Si hay un turno pendiente, lo mostramos en el contenedor
+                {turnoPendiente ? (
                     <div className="turno-pendiente">
                         <p><strong>Fecha:</strong> <span className="fecha">{formatReadableDate(turnoPendiente.fecha)}</span></p>
                         <p><strong>Hora:</strong> <span className="hora">{turnoPendiente.hora}</span></p>
@@ -218,8 +210,7 @@ const ReservarTurnos = () => {
                             Volver
                         </button>
                     </div>
-                )}
-                {!turnoPendiente && (
+                ) : (
                     <>
                         <Calendar
                             onClickDay={handleDateClick}
