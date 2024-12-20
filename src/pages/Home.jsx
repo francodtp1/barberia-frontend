@@ -14,19 +14,7 @@ const Home = () => {
           <p className="home-subtitle animate-slide-up">
             Reserva tu turno ahora y vive la mejor experiencia de cuidado personal.
           </p>
-          <Link
-            to={menuState.isAuthenticated ? "/reservarTurnos" : "#"}
-            className="home-button"
-            onClick={() => {
-              if (!menuState.isAuthenticated) {
-                Swal.fire({
-                  icon: 'info',
-                  title: 'Acceso Restringido',
-                  text: 'Por favor, inicia sesión para acceder a esta sección.',
-                });
-              }
-            }}
-          >
+          <Link to="/reservarTurnos" className="home-button">
             <FaCalendarAlt className="button-icon" />
             Reservar Turno
           </Link>
