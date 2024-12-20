@@ -26,27 +26,23 @@ const ReservarTurnos = () => {
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     const formatReadableDate = (date) => {
+        console.log("la fecha que recibo para pasar ", date);
 
-        console.log("la fecha que recibo para pasar ", date)
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         const months = [
             'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
         ];
 
-        // Convertir la fecha a la zona horaria local (Argentina)
+        // Convertimos la fecha a UTC explícitamente y extraemos sus partes
         const localDate = new Date(date);
-
-        console.log("fecha pasada", localDate)
-        const offset = localDate.getTimezoneOffset() / 60; // Obtener la diferencia horaria con UTC en horas
-        localDate.setHours(localDate.getHours() - offset + 3); // Ajustar a UTC-3 (Argentina)
-
-        const dayOfWeek = days[localDate.getDay()];
-        const dayOfMonth = localDate.getDate();
-        const month = months[localDate.getMonth()];
+        const dayOfWeek = days[localDate.getUTCDay()]; // Usar UTC para el día de la semana
+        const dayOfMonth = localDate.getUTCDate(); // Usar UTC para el día del mes
+        const month = months[localDate.getUTCMonth()]; // Usar UTC para el mes
 
         return `${dayOfWeek} ${dayOfMonth} de ${month}`;
     };
+
 
     useEffect(() => {
         const fetchSession = async () => {
