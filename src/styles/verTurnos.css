@@ -295,6 +295,7 @@
   align-items: center;
   height: 100vh;
   font-family: 'Jaro', sans-serif;
+  z-index: 5;
 }
 
 .spinner {

@@ -130,7 +130,6 @@ const VerTurnos = () => {
     return (
       <div className="loading-container">
         <div className="spinner"></div>
-        <p>Cargando turnos...</p>
       </div>
     );
 
