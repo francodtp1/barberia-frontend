@@ -107,23 +107,19 @@
 .logo-text-guri {
     color: #d48019;
     /* Naranja usado en tu diseño */
-    font-weight: bold;
 }
 
 /* Estilo para la parte "BARBER" */
 .logo-text-barber {
     color: #ffffff;
     /* Blanco */
-    font-weight: bold;
 }
 
 /* Asegúrate de que todo el texto esté alineado y se vea como una sola palabra */
 .logo-text {
-    font-size: 1.5em;
+    font-size: 1.2em;
     /* Ajusta el tamaño según sea necesario */
     display: inline;
-    font-family: 'Arial', sans-serif;
-    /* Ajusta la fuente si es necesario */
     text-transform: uppercase;
     /* Asegura que todo esté en mayúsculas */
 }
