@@ -39,21 +39,21 @@
 
 /* Títulos */
 .admin-title {
-    font-size: 2.5rem;
+    font-size: 2.0rem;
     font-weight: bold;
     margin-bottom: 20px;
     color: #d48019;
 }
 
 .admin-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     margin-bottom: 20px;
     color: #e0e0e0;
 }
 
 .admin-subtitle-dos {
     color: #e0e0e0;
-    font-size: 1.0rem;
+    font-size: 0.8rem;
 }
 
 /* Formulario */

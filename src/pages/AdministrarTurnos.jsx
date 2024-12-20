@@ -12,8 +12,14 @@ const AdministrarTurnos = () => {
   const [turnosDisponibles, setTurnosDisponibles] = useState([]);
   const [animate, setAnimate] = useState(false);
 
+  // Establecer la fecha actual al cargar el componente
+  useEffect(() => {
+    const today = new Date();
+    const formattedDate = today.toISOString().split("T")[0]; // Obtiene "YYYY-MM-DD"
+    setSelectedDate(formattedDate); // Establece la fecha actual como valor inicial
+  }, []);
 
-  // Obtener todos los turnos al cargar la página
+  // Obtener turnos por fecha seleccionada
   useEffect(() => {
     const fetchTurnos = async () => {
       try {
@@ -30,13 +36,11 @@ const AdministrarTurnos = () => {
     };
     fetchTurnos();
 
-    // Retraso de 1 segundo para iniciar la animación
     const timer = setTimeout(() => {
       setAnimate(true);
     });
 
     return () => clearTimeout(timer); // Limpiar el temporizador
-
   }, [selectedDate, isModalOpen]);
 
   const addTimeSlot = async (e) => {
@@ -54,7 +58,6 @@ const AdministrarTurnos = () => {
     const now = new Date();
     const selectedDateTime = new Date(`${selectedDate}T${newTimeSlot}`);
 
-    // Validar que la fecha y hora no hayan pasado
     if (selectedDateTime < now) {
       Swal.fire({
         icon: 'error',
@@ -99,7 +102,7 @@ const AdministrarTurnos = () => {
         title: 'Selecciona una fecha',
         text: 'Por favor selecciona una fecha antes de ver los turnos.',
       });
-      return; // Detenemos la ejecución de la función si no hay fecha seleccionada
+      return;
     }
     setModalOpen(!isModalOpen);
   };
