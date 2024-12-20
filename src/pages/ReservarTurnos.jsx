@@ -26,8 +26,8 @@ const ReservarTurnos = () => {
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     const formatReadableDate = (date) => {
+        console.log("Fecha recibida para formatear:", date);  // Ver qué fecha llega como parámetro
 
-        console.log("la fecha que recibo para pasar ", date)
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         const months = [
             'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
@@ -36,15 +36,24 @@ const ReservarTurnos = () => {
 
         // Convertir la fecha a la zona horaria local (Argentina)
         const localDate = new Date(date);
+        console.log("Fecha local (sin ajuste):", localDate);  // Ver la fecha local antes de ajustar la zona horaria
+
         const offset = localDate.getTimezoneOffset() / 60; // Obtener la diferencia horaria con UTC en horas
+        console.log("Diferencia horaria con UTC (en horas):", offset);
+
         localDate.setHours(localDate.getHours() - offset + 3); // Ajustar a UTC-3 (Argentina)
+        console.log("Fecha ajustada a UTC-3 (Argentina):", localDate);  // Ver la fecha después del ajuste
 
         const dayOfWeek = days[localDate.getDay()];
         const dayOfMonth = localDate.getDate();
         const month = months[localDate.getMonth()];
 
-        return `${dayOfWeek} ${dayOfMonth} de ${month}`;
+        const formattedDate = `${dayOfWeek} ${dayOfMonth} de ${month}`;
+        console.log("Fecha formateada:", formattedDate);  // Ver la fecha final formateada
+
+        return formattedDate;
     };
+
 
     useEffect(() => {
         const fetchSession = async () => {
@@ -76,7 +85,9 @@ const ReservarTurnos = () => {
                 if (turnoStatus.message === 'Ya tienes un turno pendiente.') {
                     const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
 
-                    console.log("la fecha es ", fecha)
+                    console.log("La fecha del turno pendiente es:", fecha);  // Ver la fecha del turno pendiente
+                    console.log("La hora del turno pendiente es:", hora);  // Ver la hora del turno pendiente
+
                     setTurnoPendiente({ fecha, hora });  // Guardamos el turno pendiente en el estado
 
                     // Mostrar alerta y redirigir al inicio
@@ -108,6 +119,7 @@ const ReservarTurnos = () => {
                 setAvailableSlots([]);
             }
         };
+
 
         fetchTurnos();
         // Configuramos el temporizador para iniciar la animación
