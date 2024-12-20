@@ -22,8 +22,9 @@ const VerTurnos = () => {
         setTurnos(data);
 
         const diasUnicos = Array.from(
-          new Set(data.map((turno) => new Date(turno.fecha).toDateString()))
+          new Set(data.map((turno) => new Date(turno.fecha).toLocaleDateString()))
         );
+        
         setDiasConTurnos(diasUnicos);
         console.log("Días con turnos:", diasUnicos);
         setLoading(false);
