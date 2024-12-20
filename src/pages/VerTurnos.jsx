@@ -22,9 +22,15 @@ const VerTurnos = () => {
         setTurnos(data);
 
         const diasUnicos = Array.from(
-          new Set(data.map((turno) => new Date(turno.fecha).toLocaleDateString()))
+          new Set(data.map((turno) => {
+            const fecha = new Date(turno.fecha);
+            fecha.setHours(0, 0, 0, 0); // Ajustamos la hora a las 00:00:00
+            const fechaString = fecha.toDateString();
+            console.log("Fecha ajustada:", fechaString); // Verifica cómo se muestra la fecha
+            return fechaString;
+          }))
         );
-        
+
         setDiasConTurnos(diasUnicos);
         console.log("Días con turnos:", diasUnicos);
         setLoading(false);
