@@ -77,6 +77,8 @@ const ReservarTurnos = () => {
                 }
 
                 const turnos = await getTurnosDisponibles();
+
+                console.log("los turnos son: ", turnos )
                 const filteredSlots = turnos.filter((turno) => {
                     const turnoDate = new Date(turno.fecha).toISOString().split('T')[0];
                     return turnoDate === formatDate(selectedDate);
