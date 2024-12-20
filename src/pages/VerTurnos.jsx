@@ -18,11 +18,11 @@ const VerTurnos = () => {
     const fetchTurnos = async () => {
       try {
         const data = await getTurnosReservados();
-        console.log("lo que traigo es ", data)
+        console.log("lo que traigo es ", data);
         setTurnos(data);
 
         const diasUnicos = Array.from(
-          new Set(data.map((turno) => turno.fecha))
+          new Set(data.map((turno) => new Date(turno.fecha).toISOString().split('T')[0]))
         );
         setDiasConTurnos(diasUnicos);
 
@@ -43,6 +43,10 @@ const VerTurnos = () => {
     return () => clearTimeout(timer); // Limpiamos el temporizador
   }, []);
 
+  useEffect(() => {
+    console.log("Días con turnos:", diasConTurnos);
+  }, [diasConTurnos]);
+  
   const handleDayClick = (date) => {
     const turnosDelDia = turnos
       .filter(
@@ -102,9 +106,10 @@ const VerTurnos = () => {
   };
 
   const tileContent = ({ date }) => {
-    const isDiaConTurnos = diasConTurnos.includes(date.toDateString());
+    const isDiaConTurnos = diasConTurnos.includes(date.toISOString().split('T')[0]);
     return isDiaConTurnos ? <div className="highlight"></div> : null;
   };
+
 
   const isTileDisabled = ({ date }) => {
     const today = new Date();
