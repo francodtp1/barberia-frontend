@@ -18,7 +18,6 @@ const VerTurnos = () => {
     const fetchTurnos = async () => {
       try {
         const data = await getTurnosReservados();
-        console.log("lo que traigo es ", data);
         setTurnos(data);
 
         const diasUnicos = Array.from(
@@ -43,9 +42,6 @@ const VerTurnos = () => {
     return () => clearTimeout(timer); // Limpiamos el temporizador
   }, []);
 
-  useEffect(() => {
-    console.log("Días con turnos:", diasConTurnos);
-  }, [diasConTurnos]);
 
   const handleDayClick = (date) => {
     const selectedDate = date.toISOString().split('T')[0];
