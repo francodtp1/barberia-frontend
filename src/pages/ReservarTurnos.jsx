@@ -23,7 +23,13 @@ const ReservarTurnos = () => {
 
     const navigate = useNavigate();
 
-    const formatDate = (date) => date.toISOString().split('T')[0];
+    const formatDate = (date) => {
+        if (!(date instanceof Date) || isNaN(date)) {
+            console.error('Fecha inválida:', date);
+            return null;
+        }
+        return date.toISOString().split('T')[0];
+    };
 
     const formatReadableDate = (date) => {
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
@@ -60,31 +66,29 @@ const ReservarTurnos = () => {
         const fetchTurnos = async () => {
             try {
                 const turnoStatus = await checkUsuarioConTurno();
+                console.log('Turno status:', turnoStatus);
 
                 if (turnoStatus.message === 'Ya tienes un turno pendiente.') {
-                    const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
-                    const formattedDate = formatReadableDate(new Date(fecha));
+                    const { fecha, hora } = turnoStatus.turno;
+                    console.log('Turno pendiente:', fecha, hora);
 
-                    setTurnoPendiente({ fecha: formattedDate, hora });  // Guardamos el turno pendiente en el estado
+                    const formattedDate = formatReadableDate(new Date(fecha));
+                    setTurnoPendiente({ fecha: formattedDate, hora });
                     setAvailableSlots([]);
                     return;
                 }
 
                 const turnos = await getTurnosDisponibles();
+                console.log('Turnos disponibles:', turnos);
 
-                const localTurnos = turnos.map((turno) => ({
-                    ...turno,
-                    fecha: new Date(turno.fecha + 'T00:00:00Z').toLocaleDateString('es-ES'), // Convertir a local
-                }));
-
-                const filteredSlots = localTurnos.filter((turno) => {
-                    const turnoDate = new Date(turno.fecha).toLocaleDateString('es-ES');
-                    return turnoDate === selectedDate.toLocaleDateString('es-ES');
+                const filteredSlots = turnos.filter((turno) => {
+                    const turnoDate = new Date(turno.fecha).toISOString().split('T')[0];
+                    return turnoDate === formatDate(selectedDate);
                 });
 
                 setAvailableSlots(filteredSlots);
 
-                const dates = localTurnos.map((slot) => new Date(slot.fecha).toISOString().split('T')[0]);
+                const dates = turnos.map((slot) => new Date(slot.fecha).toISOString().split('T')[0]);
                 setDatesWithAvailableSlots([...new Set(dates)]);
             } catch (error) {
                 console.error('Error al verificar o cargar turnos:', error.message);
@@ -181,7 +185,9 @@ const ReservarTurnos = () => {
     };
 
     const tileContent = ({ date }) => {
-        const isDiaConTurnos = datesWithAvailableSlots.includes(date.toISOString().split('T')[0]);
+        const formattedDate = date.toISOString().split('T')[0];
+        const isDiaConTurnos = datesWithAvailableSlots.includes(formattedDate);
+
         return isDiaConTurnos ? <div className="highlight"></div> : null;
     };
 
