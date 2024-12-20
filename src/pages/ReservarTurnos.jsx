@@ -26,9 +26,8 @@ const ReservarTurnos = () => {
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     const formatReadableDate = (date) => {
-        const formatDate = date.toISOString().split('T')[0];
-        console.log("Fecha recibida para formatear:", formatDate);
 
+        console.log("la fecha que recibo para pasar ", date)
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         const months = [
             'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
@@ -36,30 +35,17 @@ const ReservarTurnos = () => {
         ];
 
         // Convertir la fecha a la zona horaria local (Argentina)
-        const localDate = new Date(formatDate);
-        console.log("Fecha local (sin ajuste):", localDate);  // Ver la fecha local antes de ajustar la zona horaria
+        const localDate = new Date(date);
 
+        console.log("fecha pasada", localDate)
         const offset = localDate.getTimezoneOffset() / 60; // Obtener la diferencia horaria con UTC en horas
-        console.log("Diferencia horaria con UTC (en horas):", offset);
-
-        // Ajustar a UTC-3 (Argentina) pero asegurarnos de que no se cambie el día
-        localDate.setHours(localDate.getHours() - offset + 3);
-        console.log("Fecha ajustada a UTC-3 (Argentina):", localDate);  // Ver la fecha después del ajuste
-
-        // Verificamos si la fecha ajustada es anterior al día que esperamos
-        if (localDate.getDate() !== new Date(date).getDate()) {
-            console.log("Ajuste de fecha no correcto, cambiamos el día.");
-            localDate.setDate(localDate.getDate() + 1);  // Ajustamos el día si se ha perdido
-        }
+        localDate.setHours(localDate.getHours() - offset + 3); // Ajustar a UTC-3 (Argentina)
 
         const dayOfWeek = days[localDate.getDay()];
         const dayOfMonth = localDate.getDate();
         const month = months[localDate.getMonth()];
 
-        const formattedDate = `${dayOfWeek} ${dayOfMonth} de ${month}`;
-        console.log("Fecha formateada:", formattedDate);  // Ver la fecha final formateada
-
-        return formattedDate;
+        return `${dayOfWeek} ${dayOfMonth} de ${month}`;
     };
 
     useEffect(() => {
@@ -92,9 +78,7 @@ const ReservarTurnos = () => {
                 if (turnoStatus.message === 'Ya tienes un turno pendiente.') {
                     const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
 
-                    console.log("La fecha del turno pendiente es:", fecha);  // Ver la fecha del turno pendiente
-                    console.log("La hora del turno pendiente es:", hora);  // Ver la hora del turno pendiente
-
+                    console.log("la fecha es ", fecha)
                     setTurnoPendiente({ fecha, hora });  // Guardamos el turno pendiente en el estado
 
                     // Mostrar alerta y redirigir al inicio
@@ -126,7 +110,6 @@ const ReservarTurnos = () => {
                 setAvailableSlots([]);
             }
         };
-
 
         fetchTurnos();
         // Configuramos el temporizador para iniciar la animación
