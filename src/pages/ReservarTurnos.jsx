@@ -26,6 +26,8 @@ const ReservarTurnos = () => {
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     const formatReadableDate = (date) => {
+
+        console.log("la fecha que recibo para pasar ", date)
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         const months = [
             'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
