@@ -18,13 +18,13 @@ const ReservarTurnos = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [datesWithAvailableSlots, setDatesWithAvailableSlots] = useState([]);
-    const [turnoPendiente, setTurnoPendiente] = useState(null);  // Nueva variable de estado
+    const [turnoPendiente, setTurnoPendiente] = useState(null);
     const [animate, setAnimate] = useState(false);
 
     const navigate = useNavigate();
 
     const formatDate = (date) => {
-        const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000); // Ajuste para zona horaria local
+        const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
         return localDate.toISOString().split('T')[0];
     };
 
@@ -34,7 +34,7 @@ const ReservarTurnos = () => {
             'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
         ];
-        const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000); // Ajuste para zona horaria local
+        const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
         return `${days[localDate.getDay()]} ${localDate.getDate()} de ${months[localDate.getMonth()]}`;
     };
 
@@ -66,10 +66,8 @@ const ReservarTurnos = () => {
                 const turnoStatus = await checkUsuarioConTurno();
 
                 if (turnoStatus.message === 'Ya tienes un turno pendiente.') {
-                    const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
-
-
-                    setTurnoPendiente({ fecha, hora });  // Guardamos el turno pendiente en el estado
+                    const { fecha, hora } = turnoStatus.turno;
+                    setTurnoPendiente({ fecha, hora });
                     setAvailableSlots([]);
                     return;
                 }
@@ -79,11 +77,10 @@ const ReservarTurnos = () => {
                     const turnoDate = formatDate(new Date(turno.fecha));
                     return turnoDate === formatDate(selectedDate);
                 });
-                
 
                 setAvailableSlots(filteredSlots);
 
-                const dates = turnos.map((slot) => new Date(slot.fecha).toISOString().split('T')[0]);
+                const dates = turnos.map((slot) => formatDate(new Date(slot.fecha)));
                 setDatesWithAvailableSlots([...new Set(dates)]);
             } catch (error) {
                 console.error('Error al verificar o cargar turnos:', error.message);
@@ -93,13 +90,12 @@ const ReservarTurnos = () => {
         };
 
         fetchTurnos();
-        // Configuramos el temporizador para iniciar la animación
+
         const timer = setTimeout(() => {
             setAnimate(true);
         });
 
-        return () => clearTimeout(timer); // Limpiamos el temporizador
-
+        return () => clearTimeout(timer);
     }, [selectedDate]);
 
     if (error) return <div className="error">{error}</div>;
@@ -180,7 +176,7 @@ const ReservarTurnos = () => {
     };
 
     const tileContent = ({ date }) => {
-        const isDiaConTurnos = datesWithAvailableSlots.includes(date.toISOString().split('T')[0]);
+        const isDiaConTurnos = datesWithAvailableSlots.includes(formatDate(date));
         return isDiaConTurnos ? <div className="highlight"></div> : null;
     };
 
