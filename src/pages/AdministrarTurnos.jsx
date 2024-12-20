@@ -22,6 +22,7 @@ const AdministrarTurnos = () => {
   // Obtener turnos por fecha seleccionada
   useEffect(() => {
     const fetchTurnos = async () => {
+      if (!selectedDate) return; // Evitar llamada si no hay fecha válida
       try {
         const turnos = await getTurnosByFecha(selectedDate);
         setTurnosDisponibles(turnos);
@@ -34,6 +35,7 @@ const AdministrarTurnos = () => {
         });
       }
     };
+
     fetchTurnos();
 
     const timer = setTimeout(() => {
