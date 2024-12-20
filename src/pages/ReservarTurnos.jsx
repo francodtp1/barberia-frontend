@@ -71,14 +71,20 @@ const ReservarTurnos = () => {
                 }
 
                 const turnos = await getTurnosDisponibles();
-                const filteredSlots = turnos.filter((turno) => {
-                    const turnoDate = new Date(turno.fecha).toISOString().split('T')[0];
-                    return turnoDate === formatDate(selectedDate);
+
+                const localTurnos = turnos.map((turno) => ({
+                    ...turno,
+                    fecha: new Date(turno.fecha + 'T00:00:00Z').toLocaleDateString('es-ES'), // Convertir a local
+                }));
+
+                const filteredSlots = localTurnos.filter((turno) => {
+                    const turnoDate = new Date(turno.fecha).toLocaleDateString('es-ES');
+                    return turnoDate === selectedDate.toLocaleDateString('es-ES');
                 });
 
                 setAvailableSlots(filteredSlots);
 
-                const dates = turnos.map((slot) => new Date(slot.fecha).toISOString().split('T')[0]);
+                const dates = localTurnos.map((slot) => new Date(slot.fecha).toISOString().split('T')[0]);
                 setDatesWithAvailableSlots([...new Set(dates)]);
             } catch (error) {
                 console.error('Error al verificar o cargar turnos:', error.message);
