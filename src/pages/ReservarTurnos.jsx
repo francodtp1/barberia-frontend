@@ -26,7 +26,7 @@ const ReservarTurnos = () => {
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     const formatReadableDate = (date) => {
-        const formatDate = (date) => date.toISOString().split('T')[0];
+        const formatDate = date.toISOString().split('T')[0];
         console.log("Fecha recibida para formatear:", formatDate);
 
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
