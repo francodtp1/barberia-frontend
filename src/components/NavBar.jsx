@@ -19,7 +19,6 @@ const NavBar = () => {
   const verifySession = async () => {
     try {
       const sessionData = await checkSession();
-      console.log("Usuario autenticado"); // Solo log una vez
       setMenuState((prev) => ({
         ...prev,
         isAuthenticated: true,
@@ -31,6 +30,9 @@ const NavBar = () => {
           icon: 'warning',
           title: 'Sesión expirada',
           text: 'Tu sesión ha expirado. Por favor, inicia sesión nuevamente.',
+        }).then(() => {
+          navigate('/');
+          window.location.reload(); // Refresca la página para actualizar el estado
         });
       }
       setMenuState((prev) => ({
@@ -38,7 +40,6 @@ const NavBar = () => {
         isAuthenticated: false,
         userRole: null,
       }));
-
     }
   };
 
