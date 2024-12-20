@@ -23,13 +23,7 @@ const ReservarTurnos = () => {
 
     const navigate = useNavigate();
 
-    const formatDate = (date) => {
-        if (!(date instanceof Date) || isNaN(date)) {
-            console.error('Fecha inválida:', date);
-            return null;
-        }
-        return date.toISOString().split('T')[0];
-    };
+    const formatDate = (date) => date.toISOString().split('T')[0];
 
     const formatReadableDate = (date) => {
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
@@ -66,21 +60,17 @@ const ReservarTurnos = () => {
         const fetchTurnos = async () => {
             try {
                 const turnoStatus = await checkUsuarioConTurno();
-                console.log('Turno status:', turnoStatus);
 
                 if (turnoStatus.message === 'Ya tienes un turno pendiente.') {
-                    const { fecha, hora } = turnoStatus.turno;
-                    console.log('Turno pendiente:', fecha, hora);
-
+                    const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
                     const formattedDate = formatReadableDate(new Date(fecha));
-                    setTurnoPendiente({ fecha: formattedDate, hora });
+
+                    setTurnoPendiente({ fecha: formattedDate, hora });  // Guardamos el turno pendiente en el estado
                     setAvailableSlots([]);
                     return;
                 }
 
                 const turnos = await getTurnosDisponibles();
-                console.log('Turnos disponibles:', turnos);
-
                 const filteredSlots = turnos.filter((turno) => {
                     const turnoDate = new Date(turno.fecha).toISOString().split('T')[0];
                     return turnoDate === formatDate(selectedDate);
@@ -185,9 +175,7 @@ const ReservarTurnos = () => {
     };
 
     const tileContent = ({ date }) => {
-        const formattedDate = date.toISOString().split('T')[0];
-        const isDiaConTurnos = datesWithAvailableSlots.includes(formattedDate);
-
+        const isDiaConTurnos = datesWithAvailableSlots.includes(date.toISOString().split('T')[0]);
         return isDiaConTurnos ? <div className="highlight"></div> : null;
     };
 
