@@ -114,3 +114,23 @@
     transform: scale(.6);
 }
 
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .toggle-password-btn {
+    position: absolute;
+    right: 15%;
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    outline: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

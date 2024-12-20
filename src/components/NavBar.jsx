@@ -38,7 +38,7 @@ const NavBar = () => {
         isAuthenticated: false,
         userRole: null,
       }));
-      
+
     }
   };
 
@@ -108,7 +108,9 @@ const NavBar = () => {
         <div className="header__content--flow">
           <section className="header-content--left">
             <a href="/" className="brand-logo">
-              <span className="logo-text">GURIBARBER</span>
+              <span className="logo-text">
+                <span className="logo-text-guri">GURI</span><span className="logo-text-barber">BARBER</span>
+              </span>
             </a>
             {menuState.isAuthenticated && (
               <button className="nav-toggle" onClick={toggleMenu}>
