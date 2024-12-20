@@ -19,7 +19,7 @@ const NavBar = () => {
   const verifySession = async () => {
     try {
       const sessionData = await checkSession();
-      console.log("Usuario autenticado:", sessionData.user); // Solo log una vez
+      console.log("Usuario autenticado"); // Solo log una vez
       setMenuState((prev) => ({
         ...prev,
         isAuthenticated: true,
