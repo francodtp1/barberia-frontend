@@ -286,3 +286,37 @@
   transform: translateY(-5px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
+
+/* Loading Animation */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Jaro', sans-serif;
+}
+
+.spinner {
+  border: 8px solid rgba(0, 0, 0, 0.1);
+  border-top: 8px solid #d48019;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}

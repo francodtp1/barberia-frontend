@@ -20,7 +20,6 @@ const VerTurnos = () => {
         const data = await getTurnosReservados();
         setTurnos(data);
 
-        console.log("la data es ", data)
         const diasUnicos = Array.from(
           new Set(data.map((turno) => new Date(turno.fecha).toISOString().split('T')[0]))
         );
@@ -38,11 +37,10 @@ const VerTurnos = () => {
     // Configuramos el temporizador para iniciar la animación
     const timer = setTimeout(() => {
       setAnimate(true);
-    });
+    }, 500); // Tiempo para iniciar la animación (500ms)
 
     return () => clearTimeout(timer); // Limpiamos el temporizador
   }, []);
-
 
   const handleDayClick = (date) => {
     const selectedDate = date.toISOString().split('T')[0];
@@ -53,7 +51,6 @@ const VerTurnos = () => {
     setTurnosDia(turnosDelDia);
     setFechaSeleccionada(date);
   };
-
 
   const handleBackToCalendar = () => {
     setFechaSeleccionada(null);
@@ -109,7 +106,6 @@ const VerTurnos = () => {
     });
   };
 
-
   const formatReadableDate = (date) => {
     const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
     const months = [
@@ -124,14 +120,20 @@ const VerTurnos = () => {
     return isDiaConTurnos ? <div className="highlight"></div> : null;
   };
 
-
   const isTileDisabled = ({ date }) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return date < today; // Deshabilitar días anteriores
   };
 
-  if (loading) return <div className="loading">Cargando turnos...</div>;
+  if (loading)
+    return (
+      <div className="loading-container">
+        <div className="spinner"></div>
+        <p>Cargando turnos...</p>
+      </div>
+    );
+
   if (error) return <div className="error">{error}</div>;
 
   return (
@@ -145,10 +147,10 @@ const VerTurnos = () => {
               tileContent={tileContent}
               tileDisabled={isTileDisabled}
               className="custom-calendar"
-              showNeighboringMonth={false} // No mostrar meses vecinos
-              prev2Label={null} // Elimina la opción de ir dos meses atrás
-              next2Label={null} // Eliminar el botón de mes siguiente
-              minDate={new Date()} // Deshabilita meses anteriores al actual
+              showNeighboringMonth={false}
+              prev2Label={null}
+              next2Label={null}
+              minDate={new Date()}
             />
           </div>
         ) : (
