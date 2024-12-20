@@ -8,6 +8,8 @@ import { FaTimes } from 'react-icons/fa';
 import { checkSession, checkUsuarioConTurno } from '../services/authService';
 import { createTurnoReservado, getTurnosDisponibles } from '../services/turnosService';
 import Modal from 'react-modal';
+import { format } from 'date-fns';
+import { zonedTimeToUtc, utcToZonedTime } from 'date-fns-tz';
 
 const ReservarTurnos = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -23,17 +25,15 @@ const ReservarTurnos = () => {
 
     const navigate = useNavigate();
 
+    const timeZone = 'America/Argentina/Buenos_Aires';
+
+    const formatReadableDate = (dateString) => {
+        const zonedDate = utcToZonedTime(new Date(dateString), timeZone);
+        return format(zonedDate, "eeee dd 'de' MMMM", { locale: es }); // formato en español
+    }; 
     const formatDate = (date) => date.toISOString().split('T')[0];
 
-    const formatReadableDate = (date) => {
-        const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
-        const months = [
-            'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-            'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
-        ];
-        return `${days[date.getDay()]} ${date.getDate()} de ${months[date.getMonth()]}`;
-    };
-
+   
     useEffect(() => {
         const fetchSession = async () => {
             try {
