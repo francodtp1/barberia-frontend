@@ -26,7 +26,7 @@ const ReservarTurnos = () => {
     const formatDate = (date) => date.toISOString().split('T')[0];
 
     const formatReadableDate = (date) => {
-        console.log("Fecha recibida para formatear:", date);  // Ver qué fecha llega como parámetro
+        console.log("Fecha recibida para formatear:", date);
 
         const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         const months = [
@@ -41,8 +41,15 @@ const ReservarTurnos = () => {
         const offset = localDate.getTimezoneOffset() / 60; // Obtener la diferencia horaria con UTC en horas
         console.log("Diferencia horaria con UTC (en horas):", offset);
 
-        localDate.setHours(localDate.getHours() - offset + 3); // Ajustar a UTC-3 (Argentina)
+        // Ajustar a UTC-3 (Argentina) pero asegurarnos de que no se cambie el día
+        localDate.setHours(localDate.getHours() - offset + 3);
         console.log("Fecha ajustada a UTC-3 (Argentina):", localDate);  // Ver la fecha después del ajuste
+
+        // Verificamos si la fecha ajustada es anterior al día que esperamos
+        if (localDate.getDate() !== new Date(date).getDate()) {
+            console.log("Ajuste de fecha no correcto, cambiamos el día.");
+            localDate.setDate(localDate.getDate() + 1);  // Ajustamos el día si se ha perdido
+        }
 
         const dayOfWeek = days[localDate.getDay()];
         const dayOfMonth = localDate.getDate();
@@ -53,7 +60,6 @@ const ReservarTurnos = () => {
 
         return formattedDate;
     };
-
 
     useEffect(() => {
         const fetchSession = async () => {
