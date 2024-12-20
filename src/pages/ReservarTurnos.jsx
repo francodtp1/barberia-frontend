@@ -31,7 +31,11 @@ const ReservarTurnos = () => {
             'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
             'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
         ];
-        return `${days[date.getDay()]} ${date.getDate()} de ${months[date.getMonth()]}`;
+        // Usar toLocaleDateString para obtener la fecha en la zona horaria local
+        const localDate = new Date(date);
+        const localDateString = localDate.toLocaleDateString('es-ES', { timeZone: 'UTC' });
+
+        return `${days[localDate.getDay()]} ${localDate.getDate()} de ${months[localDate.getMonth()]}`;
     };
 
     useEffect(() => {
@@ -63,7 +67,6 @@ const ReservarTurnos = () => {
 
                 if (turnoStatus.message === 'Ya tienes un turno pendiente.') {
                     const { fecha, hora } = turnoStatus.turno; // Obtener detalles del turno
-
 
                     setTurnoPendiente({ fecha, hora });  // Guardamos el turno pendiente en el estado
                     setAvailableSlots([]);
@@ -210,8 +213,6 @@ const ReservarTurnos = () => {
                             Volver
                         </button>
                     </div>
-
-
                 )}
                 {!turnoPendiente && (
                     <>
