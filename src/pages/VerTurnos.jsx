@@ -73,8 +73,23 @@ const VerTurnos = () => {
       if (result.isConfirmed) {
         try {
           await deleteTurnoReservado(turnoId);
-          setTurnos(turnos.filter((turno) => turno.id !== turnoId));
-          setTurnosDia(turnosDia.filter((turno) => turno.id !== turnoId));
+          const updatedTurnos = turnos.filter((turno) => turno.id !== turnoId);
+          setTurnos(updatedTurnos);
+
+          // Actualizar turnos del día
+          const updatedTurnosDia = turnosDia.filter((turno) => turno.id !== turnoId);
+          setTurnosDia(updatedTurnosDia);
+
+          // Verificar si quedan turnos para la fecha seleccionada
+          const fechaSeleccionadaISO = fechaSeleccionada.toISOString().split('T')[0];
+          const turnosRestantesEnDia = updatedTurnos.filter(
+            (turno) => turno.fecha.split('T')[0] === fechaSeleccionadaISO
+          );
+
+          // Si no hay más turnos para la fecha, eliminarla de días con turnos
+          if (turnosRestantesEnDia.length === 0) {
+            setDiasConTurnos(diasConTurnos.filter((dia) => dia !== fechaSeleccionadaISO));
+          }
 
           Swal.fire({
             title: 'Cancelado',
@@ -93,6 +108,7 @@ const VerTurnos = () => {
       }
     });
   };
+
 
   const formatReadableDate = (date) => {
     const days = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
