@@ -56,10 +56,13 @@ const AdministrarTurnos = () => {
       });
       return;
     }
+    // Obtener la hora actual como objeto Date
     const now = new Date();
+
+    // Crear un objeto Date para la fecha seleccionada en la zona horaria local
+    const [year, month, day] = selectedDate.split("-").map(Number); // Extraer año, mes y día
     const [hours, minutes] = newTimeSlot.split(":").map(Number); // Extraer horas y minutos
-    const selectedDateTime = new Date(selectedDate); // Crear objeto Date basado en la fecha seleccionada
-    selectedDateTime.setHours(hours, minutes, 0, 0); // Establecer horas y minutos en la fecha seleccionada
+    const selectedDateTime = new Date(year, month - 1, day, hours, minutes, 0, 0); // Crear objeto Date local
 
     console.log("Hora actual (now):", now);
     console.log("Fecha y hora seleccionada (selectedDateTime):", selectedDateTime);
