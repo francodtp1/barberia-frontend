@@ -57,8 +57,12 @@ const AdministrarTurnos = () => {
       return;
     }
 
-    const now = new Date(new Date().toISOString());
-    const selectedDateTime = new Date(`${selectedDate}T${newTimeSlot}:00.000Z`);
+    const now = new Date(); // Hora actual en la zona horaria local
+    const selectedDateTime = new Date(`${selectedDate}T${newTimeSlot}`); // Hora local
+
+    console.log("Hora actual (now):", now);
+    console.log("Fecha y hora seleccionada (selectedDateTime):", selectedDateTime);
+
 
     if (selectedDateTime < now) {
       Swal.fire({
