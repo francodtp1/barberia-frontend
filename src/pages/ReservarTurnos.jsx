@@ -49,9 +49,7 @@ const ReservarTurnos = () => {
                     text: 'Por favor, inicia sesión para reservar un turno.',
                 });
                 navigate('/');
-            } finally {
-                setLoading(false);
-            }
+            } 
         };
 
         fetchSession();
