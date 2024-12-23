@@ -56,13 +56,13 @@ const AdministrarTurnos = () => {
       });
       return;
     }
-
-    const now = new Date().toISOString().split('T')[0]; // Hora actual en la zona horaria local
-    const selectedDateTime = new Date(`${selectedDate}T${newTimeSlot}`); // Hora local
+    const now = new Date();
+    const [hours, minutes] = newTimeSlot.split(":").map(Number); // Extraer horas y minutos
+    const selectedDateTime = new Date(selectedDate); // Crear objeto Date basado en la fecha seleccionada
+    selectedDateTime.setHours(hours, minutes, 0, 0); // Establecer horas y minutos en la fecha seleccionada
 
     console.log("Hora actual (now):", now);
     console.log("Fecha y hora seleccionada (selectedDateTime):", selectedDateTime);
-
 
     if (selectedDateTime < now) {
       Swal.fire({
