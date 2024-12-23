@@ -57,7 +57,7 @@ const AdministrarTurnos = () => {
       return;
     }
 
-    const now = new Date(); // Hora actual en la zona horaria local
+    const now = new Date().toISOString().split('T')[0]; // Hora actual en la zona horaria local
     const selectedDateTime = new Date(`${selectedDate}T${newTimeSlot}`); // Hora local
 
     console.log("Hora actual (now):", now);
