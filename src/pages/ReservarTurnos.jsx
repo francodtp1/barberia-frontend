@@ -90,10 +90,9 @@ const ReservarTurnos = () => {
 
         fetchTurnos();
 
-        // Configuramos el temporizador para iniciar la animación
         const timer = setTimeout(() => {
             setAnimate(true);
-        }, 500); // Tiempo para iniciar la animación (500ms)
+        }, 500);
 
         return () => clearTimeout(timer);
     }, [selectedDate]);
@@ -120,7 +119,6 @@ const ReservarTurnos = () => {
         fetchSlotsForDate();
     }, [selectedDate]);
 
-
     if (loading) {
         return (
             <div className="loading-container">
@@ -130,7 +128,6 @@ const ReservarTurnos = () => {
     }
 
     if (error) return <div className="error">{error}</div>;
-
 
     const confirmReservation = async (turnoId, slot) => {
         try {
@@ -265,27 +262,25 @@ const ReservarTurnos = () => {
                             </button>
                             <h2 className='tit-seleccionar'>Turnos disponibles para {formatReadableDate(selectedDate)}</h2>
                             <p className='subt-seleccionar'>Seleccione un turno:</p>
-                            {loadingSlots ? (
-                                <div className="loading-container">
-                                    <div className="spinner"></div>
-                                </div>
-                            ) : (
-                                <div className="slots-container">
-                                    {availableSlots.length > 0 ? (
-                                        availableSlots.map((turno) => (
-                                            <button
-                                                key={turno.id}
-                                                className={`slot-button ${selectedTime === turno.hora ? 'selected' : ''}`}
-                                                onClick={() => handleSlotSelection(turno.hora)}
-                                            >
-                                                {turno.hora}
-                                            </button>
-                                        ))
-                                    ) : (
-                                        <p className='error-message'>No hay turnos disponibles para esta fecha.</p>
-                                    )}
-                                </div>
-                            )}
+                            <div className="slots-container">
+                                {loadingSlots ? (
+                                    <div className="loading-container">
+                                        <div className="spinner"></div>
+                                    </div>
+                                ) : availableSlots.length > 0 ? (
+                                    availableSlots.map((turno) => (
+                                        <button
+                                            key={turno.id}
+                                            className={`slot-button ${selectedTime === turno.hora ? 'selected' : ''}`}
+                                            onClick={() => handleSlotSelection(turno.hora)}
+                                        >
+                                            {turno.hora}
+                                        </button>
+                                    ))
+                                ) : (
+                                    <p className='error-message'>No hay turnos disponibles para esta fecha.</p>
+                                )}
+                            </div>
                         </Modal>
                     </>
                 )}
