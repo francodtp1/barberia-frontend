@@ -394,14 +394,6 @@
     animation: fadeIn 1.0s ease-in-out;
 }
 
-/* Estilo para el contenedor de los slots */
-.slots-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    height: 200px; /* Altura fija para asegurar el centrado */
-}
 
 .loading-container {
     display: flex;
