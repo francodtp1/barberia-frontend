@@ -84,14 +84,14 @@ const ReservarTurnos = () => {
                 setError(error.message);
                 setAvailableSlots([]);
             } finally {
-                setLoading(false);
+                setTimeout(() => {
+                    setLoading(false);
+                    setAnimate(true);
+                }, 500); // Retraso para iniciar la animación (500ms)
             }
         };
 
         fetchTurnos();
-
-        const timer = setTimeout(() => setAnimate(true), 500);
-        return () => clearTimeout(timer);
     }, [selectedDate]);
 
     if (loading) {
