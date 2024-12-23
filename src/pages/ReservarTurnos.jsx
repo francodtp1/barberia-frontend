@@ -65,6 +65,7 @@ const ReservarTurnos = () => {
                     const { fecha, hora } = turnoStatus.turno;
                     setTurnoPendiente({ fecha, hora });
                     setAvailableSlots([]);
+                    setLoading(false);
                     return;
                 }
 
