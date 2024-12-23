@@ -20,6 +20,7 @@ const ReservarTurnos = () => {
     const [datesWithAvailableSlots, setDatesWithAvailableSlots] = useState([]);
     const [turnoPendiente, setTurnoPendiente] = useState(null);
     const [animate, setAnimate] = useState(false);
+    const [loadingSlots, setLoadingSlots] = useState(false);
 
     const navigate = useNavigate();
 
@@ -49,7 +50,7 @@ const ReservarTurnos = () => {
                     text: 'Por favor, inicia sesión para reservar un turno.',
                 });
                 navigate('/');
-            } 
+            }
         };
 
         fetchSession();
@@ -97,6 +98,29 @@ const ReservarTurnos = () => {
         return () => clearTimeout(timer);
     }, [selectedDate]);
 
+    useEffect(() => {
+        const fetchSlotsForDate = async () => {
+            if (!selectedDate) return;
+            setLoadingSlots(true);
+            try {
+                const turnos = await getTurnosDisponibles();
+                const filteredSlots = turnos.filter((turno) => {
+                    const turnoDate = new Date(turno.fecha).toISOString().split('T')[0];
+                    return turnoDate === formatDate(selectedDate);
+                });
+                setAvailableSlots(filteredSlots);
+            } catch (error) {
+                console.error('Error al cargar turnos disponibles:', error.message);
+                setAvailableSlots([]);
+            } finally {
+                setLoadingSlots(false);
+            }
+        };
+
+        fetchSlotsForDate();
+    }, [selectedDate]);
+
+
     if (loading) {
         return (
             <div className="loading-container">
@@ -106,6 +130,7 @@ const ReservarTurnos = () => {
     }
 
     if (error) return <div className="error">{error}</div>;
+
 
     const confirmReservation = async (turnoId, slot) => {
         try {
@@ -240,21 +265,27 @@ const ReservarTurnos = () => {
                             </button>
                             <h2 className='tit-seleccionar'>Turnos disponibles para {formatReadableDate(selectedDate)}</h2>
                             <p className='subt-seleccionar'>Seleccione un turno:</p>
-                            <div className="slots-container">
-                                {availableSlots.length > 0 ? (
-                                    availableSlots.map((turno) => (
-                                        <button
-                                            key={turno.id}
-                                            className={`slot-button ${selectedTime === turno.hora ? 'selected' : ''}`}
-                                            onClick={() => handleSlotSelection(turno.hora)}
-                                        >
-                                            {turno.hora}
-                                        </button>
-                                    ))
-                                ) : (
-                                    <p className='error-message'>No hay turnos disponibles para esta fecha.</p>
-                                )}
-                            </div>
+                            {loadingSlots ? (
+                                <div className="loading-container">
+                                    <div className="spinner"></div>
+                                </div>
+                            ) : (
+                                <div className="slots-container">
+                                    {availableSlots.length > 0 ? (
+                                        availableSlots.map((turno) => (
+                                            <button
+                                                key={turno.id}
+                                                className={`slot-button ${selectedTime === turno.hora ? 'selected' : ''}`}
+                                                onClick={() => handleSlotSelection(turno.hora)}
+                                            >
+                                                {turno.hora}
+                                            </button>
+                                        ))
+                                    ) : (
+                                        <p className='error-message'>No hay turnos disponibles para esta fecha.</p>
+                                    )}
+                                </div>
+                            )}
                         </Modal>
                     </>
                 )}
