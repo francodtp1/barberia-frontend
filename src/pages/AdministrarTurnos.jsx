@@ -57,8 +57,8 @@ const AdministrarTurnos = () => {
       return;
     }
 
-    const now = new Date();
-    const selectedDateTime = new Date(`${selectedDate}T${newTimeSlot}`);
+    const now = new Date(new Date().toISOString());
+    const selectedDateTime = new Date(`${selectedDate}T${newTimeSlot}:00.000Z`);
 
     if (selectedDateTime < now) {
       Swal.fire({
