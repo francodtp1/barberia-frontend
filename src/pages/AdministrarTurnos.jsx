@@ -62,9 +62,6 @@ const AdministrarTurnos = () => {
     const [hours, minutes] = newTimeSlot.split(":").map(Number);
     const selectedDateTime = new Date(year, month - 1, day, hours, minutes, 0, 0);
 
-    console.log("Hora actual (now):", now);
-    console.log("Fecha y hora seleccionada (selectedDateTime):", selectedDateTime);
-
     if (selectedDateTime < now) {
       Swal.fire({
         icon: 'error',
