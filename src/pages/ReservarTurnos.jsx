@@ -79,19 +79,24 @@ const ReservarTurnos = () => {
 
                 const dates = turnos.map((slot) => new Date(slot.fecha).toISOString().split('T')[0]);
                 setDatesWithAvailableSlots([...new Set(dates)]);
+
+                setLoading(false);
             } catch (error) {
                 console.error('Error al verificar o cargar turnos:', error.message);
                 setError(error.message);
                 setAvailableSlots([]);
-            } finally {
-                setTimeout(() => {
-                    setLoading(false);
-                    setAnimate(true);
-                }, 500); // Retraso para iniciar la animación (500ms)
+                setLoading(false);
             }
         };
 
         fetchTurnos();
+
+        // Configuramos el temporizador para iniciar la animación
+        const timer = setTimeout(() => {
+            setAnimate(true);
+        }, 500); // Tiempo para iniciar la animación (500ms)
+
+        return () => clearTimeout(timer);
     }, [selectedDate]);
 
     if (loading) {
