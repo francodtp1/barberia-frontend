@@ -135,7 +135,7 @@
     animation: fadeIn 1.0s ease-in-out;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 580px) {
     .admin-content-principal {
         margin-top: -50px ;
     }
