@@ -264,7 +264,7 @@ const ReservarTurnos = () => {
                             <p className='subt-seleccionar'>Seleccione un turno:</p>
                             <div className="slots-container">
                                 {loadingSlots ? (
-                                    <div className="loading-container">
+                                    <div className="loading-container2">
                                         <div className="spinner2"></div>
                                     </div>
                                 ) : availableSlots.length > 0 ? (
