@@ -116,21 +116,27 @@
 
 .view-button:hover {
     background-color: #d48019;
-    
+
 }
 
 @keyframes fadeIn {
     from {
-      opacity: 0;
-      transform: translateY(-20px);
+        opacity: 0;
+        transform: translateY(-20px);
     }
+
     to {
-      opacity: 1;
-      transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0);
     }
-  }
-  
-  .admin-container.animate {
+}
+
+.admin-container.animate {
     animation: fadeIn 1.0s ease-in-out;
-  }
-  
+}
+
+@media (max-width: 480px) {
+    .admin-content-principal {
+        margin-top: -30px ;
+    }
+}
