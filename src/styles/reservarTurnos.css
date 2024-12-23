@@ -393,3 +393,45 @@
 .reservar-container.animate {
     animation: fadeIn 1.0s ease-in-out;
 }
+
+/* Estilo para el contenedor de los slots */
+.slots-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 200px; /* Altura fija para asegurar el centrado */
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Estilo del spinner */
+.spinner2 {
+    width: 50px;
+    height: 50px;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #d48019;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Animación del spinner */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Estilo para ocultar los botones cuando se está cargando */
+.slots-container.loading .slot-button {
+    display: none;
+}

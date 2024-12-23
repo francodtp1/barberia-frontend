@@ -265,7 +265,7 @@ const ReservarTurnos = () => {
                             <div className="slots-container">
                                 {loadingSlots ? (
                                     <div className="loading-container">
-                                        <div className="spinner"></div>
+                                        <div className="spinner2"></div>
                                     </div>
                                 ) : availableSlots.length > 0 ? (
                                     availableSlots.map((turno) => (
